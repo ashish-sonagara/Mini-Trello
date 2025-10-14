@@ -1,0 +1,54 @@
+<div class="container-fluid">
+    <div class="row main-content">
+        <div class="col-md-12 form-col">
+            <form #taskForm="ngForm" (ngSubmit)="onFormSubmission(taskForm)">
+                <div class="form-container">
+                    <div class="inside-form">
+                        <label for="title">Title : </label><br>
+                        <input type="text" placeholder="enter title here.." name="title" class="input"
+                            [(ngModel)]="newTask.title" required>
+                    </div>
+                    <div class="inside-form">
+                        <label for="imageURL">ImageURL : </label><br>
+                        <input type="text" placeholder="enter imageURL here.." name="imageURL" class="input"
+                            [(ngModel)]="newTask.imageURL" required>
+                    </div>
+                    <div class="inside-form">
+                        <label for="description">Description : </label><br>
+                        <input type="text" placeholder="enter description here.." name="description" class="input"
+                            [(ngModel)]="newTask.description" required>
+                    </div>
+                    <div class="inside-form">
+                        <label for="status" style="margin-right: 1rem;margin-bottom: 1rem;">status : </label>
+
+                        <label for="Completed">Completed : </label>
+                        <input type="radio" name="status" value="completed" class="status" [(ngModel)]="newTask.status">
+
+                        <label for="inProgress">inProgress : </label>
+                        <input type="radio" name="status" value="inProgress" class="status"
+                            [(ngModel)]="newTask.status">
+
+                        <label for="overdue">Overdue : </label>
+                        <input type="radio" name="status" value="overdue" class="status" [(ngModel)]="newTask.status">
+                    </div>
+                    <div class="inside-form">
+                        <label for="assignedemailto">AssignEmailTo : </label><br>
+                        <input type="email" placeholder="enter assigned task to.." name="assignedUserEmail"
+                            class="input" [(ngModel)]="newTask.assignedUserEmail" required>
+                    </div>
+                    <div class="inside-form">
+                        <label for="assignProject">AssignProject : </label><br>
+                        <input type="text" placeholder="enter assigned task to.." name="assignProject" class="input"
+                            [(ngModel)]="newTask.assignedProject" required>
+                    </div>
+                    <div class="hr-line"></div>
+                    <div class="button">
+                        <button type="button" class="btn btn-secondary" (click)="goBack()">Close</button>
+                        <button type="submit" class="btn btn-primary" 
+                            [disabled]="taskForm.invalid"> {{ isediting ? 'Edit' : 'Submit' }}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

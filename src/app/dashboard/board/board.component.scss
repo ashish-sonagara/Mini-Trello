@@ -1,0 +1,185 @@
+.main-content {
+    padding: 1rem 2rem;
+    background-color: #f4f5f7;
+    min-height: 100vh;
+
+    .head {
+        font-family: 'Times New Roman', Times, serif;
+        margin-bottom: 1.5rem;
+
+        h2 {
+            font-size: 30px;
+        }
+    }
+
+    .recently-viewed {
+        .recently-viewed-head {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+
+            .section-title {
+                font-weight: 600;
+                color: #5e6c84;
+                margin-bottom: 1rem;
+                display: flex;
+                align-items: center;
+                gap: 0.4rem;
+            }
+
+            .button {
+                button {
+                    height: 35px;
+                    width: 100px;
+                    border: 1px solid #0052CC;
+                    border-radius: 0.3rem;
+                    background-color: #0052CC;
+                    color: white;
+                }
+
+                button:hover {
+                    background-color: rgba(0, 101, 255, 0.99);
+                }
+            }
+        }
+    }
+
+
+
+    .boards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .gradient{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient( green , rgb(0, 140, 255));
+    }
+
+    .board-card {
+        position: relative;
+        background-color: #fff;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s;
+        cursor: pointer;
+
+        &:hover {
+            transform: translateY(-2px);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem;
+
+            h6 {
+                font-weight: 600;
+                margin: 0;
+                color: #172b4d;
+            }
+
+            .dustbin {
+                height: 25px;
+                width: 25px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+
+                img {
+                    height: 100%;
+                    width: 100%;
+                    object-fit: contain;
+                }
+            }
+        }
+    }
+
+
+    .workspace-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.2rem;
+        gap: 1rem;
+
+        .workspace-logo {
+            background-color: #0079bf;
+            color: #fff;
+            width: 36px;
+            height: 36px;
+            border-radius: 0.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .workspace-name {
+            flex: 1;
+            font-weight: 600;
+            color: #172b4d;
+        }
+
+        .workspace-actions .btn {
+            margin-left: 0.4rem;
+            font-size: 0.85rem;
+        }
+    }
+}
+
+.modal {
+    margin-top: 5rem;
+
+    .form-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+
+        .hr-line {
+            height: 1px;
+            width: 105%;
+            background-color: #c5c5c5;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .inside-form {
+            .input {
+                height: 35px;
+                width: 400px;
+                border: 1px solid;
+                border-radius: 0.3rem;
+                margin-bottom: 1rem;
+                padding-left: 0.8rem;
+            }
+
+            .status {
+                margin-right: 1.2rem;
+            }
+        }
+
+        .button {
+            width: 100%;
+            display: flex;
+            justify-content: space-evenly;
+        }
+    }
+}

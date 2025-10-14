@@ -1,0 +1,30 @@
+<div class="main-container">
+    <!-- Recently viewed -->
+    <section class="recently-edited">
+        <div class="head">
+            <h5 class="section-title">
+                Recently viewed
+            </h5>
+            <div class="button">
+                <button type="button" class="btn btn-primary" (click)="redirectToTaskform()">
+                    Add Task
+                </button>
+            </div>
+        </div>
+        <div class="recent-task">
+            <div class="task-card" *ngFor="let task of taskList">
+                <div class="circle"></div>
+                <div class="content">
+                    <h3>Title : {{task.title}}</h3>
+                    <p>{{task.description}}</p>
+                    <p>status : {{task.status}}</p>
+                    <div>
+                        <button class="btn btn-success" (click)="editCurrentTask(task.id)"> view detail </button>
+                        <button class="btn btn-primary" (click)="deleteTask(task.id)"> Delete </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>

@@ -1,0 +1,154 @@
+<app-header></app-header>
+<div class="container-fluid">
+    <div class="row main-container g-2">
+        <div class="col-md-3 left-side-bar">
+            <div class="inbox">
+                <h5>Inbox</h5>
+            </div>
+            <div class="search">
+                <input type="search" placeholder="Add card here..">
+            </div>
+            <div class="apps">
+                <h3>Conslidate your To-dos</h3>
+                <p> Email it , say it,forward it- <br> however it comes , get it into Trello fast</p>
+            </div>
+        </div>
+        <div class="col-md-9 right-side-bar">
+            <div class="header">
+                <h5>Project Based Learning </h5>
+                <div class="template">
+                    <p>Template</p>
+                </div>
+            </div>
+            <div class="tasks">
+                <div class="task-card" *ngFor="let item of projectBasedTaskList">
+                    <div class="card" *ngIf="!item.flipped">
+                        <!-- Image Section -->
+                        <div class="image">
+                            <img [src]="item.imageURL" alt="Angular Task" />
+                        </div>
+
+                        <!-- Content Section -->
+                        <div class="content">
+                            <h5>
+                                <span>Title :</span>
+                                {{item.title}}
+                            </h5>
+                            <p>Description: {{item.description}}</p>
+                            <div style="display: flex;justify-content: space-between;">
+                                <p>Status: <span [ngClass]="{
+                                'text-green': item.status === 'completed',
+                                'text-blue': item.status === 'inProgress',
+                                'text-red': item.status === 'overdue'
+                                }"> {{item.status}}</span></p>
+                                <div class="comments" (click)="writeComments(item.id)"><img
+                                        src="https://img.icons8.com/parakeet-line/48/comments.png" alt="comments" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Footer Section -->
+                        <div class="button">
+                            <button (click)="taskCompleted(item.id)">Task Done</button>
+                            <div class="delete" (click)="editCurrentTask(item.id)">
+                                <img width="24" height="24" src="https://img.icons8.com/ios/50/create-new.png"
+                                    alt="create-new" />
+                            </div>
+                            <div class="delete" (click)="deleteTask(item.id)">
+                                <img width="24" height="24" src="https://img.icons8.com/material/24/filled-trash.png"
+                                    alt="Delete Task" />
+                            </div>
+                        </div>
+                    </div>
+                    <!-- HTML Template -->
+                    <div class="card-back" *ngIf="item.flipped">
+                        <!-- Header with back arrow -->
+                        <div class="back-header">
+                            <button class="back-arrow" (click)="backToCardFront(item.id)">
+                                <img width="30" height="30" src="https://img.icons8.com/ios/50/circled-left-2.png"
+                                    alt="Back" />
+                            </button>
+                            <h6>Comments</h6>
+                        </div>
+
+                        <!-- Scrollable comments section -->
+                        <div class="comments-section">
+                            <div class="comment-item" *ngFor="let comment of item.comments">
+                                <div class="comment-content" *ngIf="!item.noComment">
+                                    <div class="comment-meta">
+                                        <span class="author-name">{{comment.commentAuthor}}</span>
+                                        <span class="comment-time">{{comment.date | date: 'M/d/yy, h:mm a'}}</span>
+                                    </div>
+                                    <p class="comment-text">{{comment.description}}</p>
+                                </div>
+                            </div>
+
+                            <!-- Empty state -->
+                            <div class="empty-state" *ngIf="item.noComment">
+                                <img width="60" height="60" src="https://img.icons8.com/ios/50/topic--v1.png"
+                                    alt="No comments" />
+                                <p>No comments yet</p>
+                                <span>Be the first to comment!</span>
+                            </div>
+                        </div>
+
+                        <!-- Fixed add button at bottom -->
+                        <button class="add-comment-button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                            (click)="openCommentModal(item.id)">
+                            <img width="24" height="24" src="https://img.icons8.com/ios/50/add--v1.png" alt="Add" />
+                            <span>
+                                Add Comment
+                            </span>
+                        </button>
+                    </div>
+
+                </div>
+                <div class="add-task" (click)="redirectToTaskform()">
+                    <img width="64" height="64"
+                        src="https://img.icons8.com/external-tal-revivo-tritone-tal-revivo/64/external-add-button-template-for-website-and-service-basic-tritone-tal-revivo.png"
+                        alt="external-add-button-template-for-website-and-service-basic-tritone-tal-revivo" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Comment Here..</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form #commentForm="ngForm" (ngSubmit)="onCommentFormSubmission(commentForm)">
+                    <div class="form-container">
+                        <div class="inside-form">
+                            <label for="commentAuthor">commentAuthor : </label><br>
+                            <input type="text" placeholder="enter commentAuthor here.." name="commentAuthor"
+                                class="input" [(ngModel)]="newComment.commentAuthor" required>
+                        </div>
+                        <div class="inside-form">
+                            <label for="date">Date : </label><br>
+                            <input type="text" name="date" class="input" disabled [(ngModel)]="newComment.date"
+                                required>
+                        </div>
+                        <div class="inside-form">
+                            <label for="description">Description : </label><br>
+                            <input type="text" placeholder="enter description of comment.." name="description"
+                                class="input" [(ngModel)]="newComment.description" required>
+                        </div>
+                        <div class="hr-line"></div>
+                        <div class="button">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"
+                                [disabled]="commentForm.invalid">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

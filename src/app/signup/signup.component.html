@@ -1,0 +1,57 @@
+<div class="container-fluid">
+    <div class="signup-container">
+        <div class="heading">
+            <h2><span style="color: #172b4d;font-family: 'Times New Roman', Times, serif;">Mini-Torello</span></h2>
+        </div>
+        <div class="signup">
+            <p style="color: #172b4d;font-weight: 600;transform: translateX(65%);">Sign Up to continue</p>
+            <form [formGroup]="userForm" (ngSubmit)="formSubmitted()">
+                <input type="text" placeholder="Enter your Name.. " class="inputs" formControlName="name">
+                <input type="text" placeholder="Enter your Email.. " class="inputs" formControlName="email">
+                <input type="password" placeholder="Enter your password.." class="inputs" formControlName="password">
+                <select formControlName="role" id="role" class="inputs">
+                    <option value="" disabled selected>Select the Role</option>
+                    <option value="Admin">Admin</option>
+                    <option value="User">User</option>
+                    <option value="Developer">Developer</option>
+                </select>
+
+                <p style="font-size: 12px;">
+                    By signing up , I accept the Atlassian <span style="color: #0c66e4;text-decoration: underline;">
+                        Cloud
+                        Terms of Service
+                    </span><br> and acknowledge the <span style="color: #0c66e4;text-decoration: underline;">Privacy
+                        Policy.</span>
+                </p>
+                <button type="submit" class="button" [disabled]="userForm.invalid"> Sign up </button>
+            </form>
+        </div>
+        <div class="other">
+            <div class="hr">
+                <hr style="flex:1; border:none; height:1px; background:#5e5e5e;">
+                <p style="font-weight:600; color:rgb(104,104,104); margin:0;transform: translateY(-10%);">or Continue
+                    With :
+                </p>
+                <hr style="flex:1; border:none; height:1px; background:#5e5e5e;">
+            </div>
+            <button type="button" class="other-links"> <img width="28" height="28"
+                    src="https://img.icons8.com/color/48/google-logo.png" alt="google-logo"
+                    style="margin-right: 0.2rem;" /> Google </button>
+            <button type="button" class="other-links"> <img width="28" height="28"
+                    src="https://img.icons8.com/color/48/microsoft.png" alt="microsoft" style="margin-right: 0.2rem;" />
+                MicroSoft </button>
+            <button type="button" class="other-links"> <img width="28" height="28"
+                    src="https://img.icons8.com/ios-filled/50/mac-os.png" alt="mac-os" style="margin-right: 0.2rem;" />
+                Apple </button>
+            <button type="button" class="other-links"> <img width="24" height="24"
+                    src="https://img.icons8.com/external-tal-revivo-color-tal-revivo/24/external-slack-replace-email-text-messaging-and-instant-messaging-for-your-team-logo-color-tal-revivo.png"
+                    alt="external-slack-replace-email-text-messaging-and-instant-messaging-for-your-team-logo-color-tal-revivo"
+                    style="margin-right: 0.4rem;" /> Slack </button>
+            <p style="font-size: 13px;color: #0c66e4;margin-top: 0.2rem;cursor: pointer;">
+                <a routerLink="/signIn">Already have an Atlassian
+                    Account ? <span style="text-decoration: underline;">Log in</span></a>
+            </p>
+
+        </div>
+    </div>
+</div>

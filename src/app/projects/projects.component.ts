@@ -1,0 +1,125 @@
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { TaskService } from '../services/task.service';
+import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
+import { Task, TaskWithUI } from '../interface/task.interface';
+import { AuthUser } from '../interface/user.interface';
+import { combineLatest, fromEvent } from 'rxjs';
+import { ProjectService } from '../services/project.service';
+import { NgForm } from '@angular/forms';
+import { CommentInterface } from '../interface/comment.interface';
+
+@Component({
+  selector: 'app-projects',
+  templateUrl: './projects.component.html',
+  styleUrls: ['./projects.component.scss']
+})
+export class ProjectsComponent implements OnInit {
+
+  @ViewChild('commentForm') commentForm : NgForm | undefined ; 
+
+  projectTitle: string = "";
+  userData !: AuthUser;
+  // taskList: Task[] = [];
+  projectBasedTaskList: TaskWithUI[] = [];
+
+  // Comment Parts 
+  newComment: CommentInterface = {
+    commentAuthor: '',
+    date: new Date().toLocaleDateString(),
+    description: ''
+  }
+  currentCommentTaskId: number | null = null;
+
+
+  constructor(private taskService: TaskService, private userService: UserService, private router: Router, private projectService: ProjectService) { }
+
+  ngOnInit(): void {
+    const token = this.userService.getTokenFromSessionStorage();
+    if (!token) {
+      this.router.navigate(['/signIn']);
+    }
+    else {
+      this.userData = token;
+    }
+
+    let title = sessionStorage.getItem('title');
+    if (title) {
+      this.projectTitle = JSON.parse(title);
+      this.projectService.getProjectTaskList(this.projectTitle);
+    }
+    // using the subject which is in the taskService 
+    this.projectService.projectTaskList$.subscribe(res => {
+      this.projectBasedTaskList = res.map(task => {
+        return { ...task, flipped: false, noComment: true }
+      });
+
+    })
+    console.log("inside the project component ---", this.projectBasedTaskList)
+  }
+
+  writeComments(taskId: number) {
+    console.log(taskId)
+    this.projectBasedTaskList = this.projectBasedTaskList.map(task => {
+      if (task.id == taskId) {
+        console.log(task)
+        return { ...task, flipped: !task.flipped }
+      }
+      return task
+    })
+  }
+
+  backToCardFront(taskId: number) {
+    this.projectBasedTaskList = this.projectBasedTaskList.map(task => {
+      if (task.id === taskId) {
+        return { ...task, flipped: !task.flipped }
+      }
+      return task
+    })
+  }
+
+  redirectToTaskform() {
+    this.router.navigate(['/taskForm']);
+  }
+
+  deleteTask(index: number) {
+    this.taskService.deleteTaskFromSubject(index);
+  }
+
+  taskCompleted(index: number) {
+    this.taskService.taskCompleted(index);
+  }
+
+  editCurrentTask(index: number) {
+    this.taskService.editCurrentTask(index)
+  }
+
+  openCommentModal(taskId: number) {
+    this.currentCommentTaskId = taskId;
+    // this.commentForm?.resetForm();s
+  }
+
+  onCommentFormSubmission(form: NgForm) {
+    console.log(form.value)
+    this.newComment = {
+      commentAuthor: form.value.commentAuthor,
+      date: new Date().toISOString(),
+      description: form.value.description
+    }
+    this.addCommentToTheTask(this.newComment);
+
+    // form.resetForm();        
+    this.currentCommentTaskId = null;
+  }
+
+  addCommentToTheTask(newComment: CommentInterface) {
+    this.projectBasedTaskList = this.projectBasedTaskList.map(task => {
+      if (task.id == this.currentCommentTaskId) {
+        return { ...task, comments: [...task.comments || [], newComment], noComment: false }
+      }
+      return task
+    })
+    this.taskService.tasks$.next(this.projectBasedTaskList);
+  }
+
+}

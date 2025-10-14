@@ -1,0 +1,35 @@
+<app-header></app-header>
+<div class="container-fluid">
+    <div class="row main-container">
+        <div class="col-md-2 side-bar">
+            <div class="blocks">
+                <div class="block" (click)="selectedItem('board')"> <img width="24" height="24"
+                        src="https://img.icons8.com/color/48/trello.png" alt="trello" /> Board</div>
+                <div class="block"> <img width="24" height="24" src="https://img.icons8.com/fluency/48/template.png"
+                        alt="template" />Template</div>
+                <div class="block"> <img width="23" height="23" src="https://img.icons8.com/tiny-color/16/home.png"
+                        alt="home" /> Home</div>
+                <div class="block" (click)="selectedItem('task')"> <img width="23" height="23"
+                        src="https://img.icons8.com/color-glass/48/task.png" alt="task" />All Task</div>
+                <div class="block" (click)="selectedItem('stats')"> <img width="23" height="23"
+                        src="https://img.icons8.com/fluency/48/rebalance-portfolio.png" alt="rebalance-portfolio" />
+                    Task Statistics</div>
+
+                <div
+                    style="height: 1px; width: 80%;background-color: grey;margin-left: 1rem;margin-top: 1rem;margin-bottom: 1rem;">
+                </div>
+
+                <p>WorkSpace</p>
+                <div class="block"><img width="24" height="24"
+                        src="https://img.icons8.com/3d-fluency/94/under-computer.png" alt="under-computer" /> Trello
+                    WorkSpace </div>
+            </div>
+        </div>
+        <div class="hr"></div>
+        <div class="col-md-9" [ngSwitch]="dashboardSelectedItem">
+            <div *ngSwitchCase="'task'"><app-task></app-task></div>
+            <div *ngSwitchCase="'stats'"><app-stats></app-stats></div>
+            <div *ngSwitchDefault><app-board></app-board></div>
+        </div>
+    </div>
+</div>

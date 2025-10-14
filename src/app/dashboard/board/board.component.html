@@ -1,0 +1,107 @@
+<div class="main-content">
+    <!-- Recently viewed -->
+    <div class="head">
+        <h2>Hii , {{userData.name}} 👋</h2>
+    </div>
+    <section class="recently-viewed">
+        <div class="recently-viewed-head">
+            <h5 class="section-title">
+                Recently viewed
+            </h5>
+            <div class="button">
+                <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Add Project
+                </button>
+            </div>
+        </div>
+
+        <div class="boards-grid">
+            <div class="board-card" *ngFor="let project of projectList; let i = index">
+                <a routerLink="/project" (click)="goingToTheprojectPage(project.title)">
+                    <img [src]="project.imageURL" alt="new-project">
+                </a>
+
+                <div class="card-footer">
+                    <h6>{{ project.title }}</h6>
+                    <div class="dustbin" (click)="deleteProject(i)">
+                        <img src="https://img.icons8.com/ios-glyphs/30/filled-trash.png" alt="filled-trash"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Workspaces -->
+    <section class="workspaces">
+        <h5 class="section-title">Your Workspaces</h5>
+
+        <div class="workspace-header">
+            <div class="workspace-logo">T</div>
+            <div class="workspace-name">Trello Workspace</div>
+            <div class="workspace-actions">
+                <button class="btn btn-light">Boards</button>
+                <button class="btn btn-light">Members</button>
+                <button class="btn btn-light">Settings</button>
+            </div>
+        </div>
+
+        <div class="boards-grid">
+            <div class="board-card">
+                <img src="assets/sample2.png" alt="mini-torello">
+                <h6>mini-torello</h6>
+            </div>
+
+            <div class="board-card gradient">
+                <h6>My Trello board ★</h6>
+                <!-- <span class="star"></span> -->
+            </div>
+
+            <div class="board-card gradient">
+                <h6>Create new board</h6>
+            </div>
+        </div>
+
+        <button class="btn btn-outline-secondary mt-3">View all closed boards</button>
+    </section>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Project Here..</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form #taskForm="ngForm" (ngSubmit)="onFormSubmission(taskForm)">
+                    <div class="form-container">
+                        <div class="inside-form">
+                            <label for="title">Title : </label><br>
+                            <input type="text" placeholder="enter title here.." name="title" class="input"
+                                [(ngModel)]="project.title" required>
+                        </div>
+                        <div class="inside-form">
+                            <label for="description">Image URL : </label><br>
+                            <input type="text" placeholder="enter ImageUrl here.." name="imageURL" class="input"
+                                [(ngModel)]="project.imageURL" required>
+                        </div>
+                        <div class="inside-form">
+                            <label for="assignedemailto">AssignEmailTo : </label><br>
+                            <input type="email" placeholder="enter assigned task to.." name="assignedUserEmail"
+                                class="input" [(ngModel)]="project.assignedUserEmail" required>
+                        </div>
+                        <div class="hr-line"></div>
+                        <div class="button">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"
+                                [disabled]="taskForm.invalid">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

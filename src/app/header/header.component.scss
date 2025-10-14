@@ -1,0 +1,91 @@
+.trello-navbar {
+    background-color: #fff;
+    border-bottom: 1px solid #e4e6eb;
+    // padding: 0.4rem 1rem;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    height: 10vh;
+
+    .container-fluid {
+        height: 100%;
+        width: 100%;
+        // background-color: black;
+        box-sizing: border-box;
+        padding: 0rem 2rem;
+
+        .brand-group {
+
+            .atl {
+                font-size: 0.65rem;
+                letter-spacing: 1px;
+                color: #0052CC;
+                /* Atlassian blue */
+                font-weight: 700;
+            }
+        }
+
+        .center-nav {
+
+            .navbar-nav {
+                .nav-link {
+                    display: inline-block;
+                    color: #172b4d;
+                    font-weight: 500;
+                    padding: 0 1rem;
+                    position: relative; // so ::after is scoped to this element
+
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        left: 15px;
+                        bottom: -1.2rem; // 👈 pushes the underline down to navbar bottom
+                        width: 0;
+                        height: 0.12rem;
+                        background-color: #0065FF;
+                        transition: width 0.3s ease;
+                    }
+
+                    &:hover::after {
+                        width: 70%; // underline stretches across text width
+                    }
+                }
+
+                .nav-link:hover {
+                    color: #0065FF;
+                }
+            }
+        }
+
+        .actions {
+            .login-link {
+                color: #172b4d;
+                text-decoration: none;
+                font-weight: 500;
+                margin-left: 1rem;
+            }
+
+            .login-link:hover {
+                color: #0052CC;
+
+            }
+
+            .trello-btn {
+                background-color: #0052CC;
+                border-color: #0052CC;
+                font-weight: 600;
+                padding: 0.4rem 1rem;
+                border-radius: 4px;
+            }
+
+
+            .trello-btn:hover {
+                background-color: rgba(0, 101, 255, 0.99);
+                border-color: #0065FF;
+            }
+        }
+
+
+    }
+
+}

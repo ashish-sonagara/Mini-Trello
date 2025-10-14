@@ -1,0 +1,133 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+.container-fluid {
+    box-sizing: border-box;
+    background-color: rgb(244, 245, 247);
+
+    .firstpart {
+        margin-left: 0;
+        margin-right: 0;
+
+        .left-side {
+            padding: 3rem 6rem;
+
+            .para h1 {
+                font-size: 42px;
+                color: #172b4d;
+            }
+
+            .para p {
+                font-size: 19px;
+                color: #172b4d;
+                font-weight: 500;
+            }
+
+            .input {
+                margin-top: 2rem;
+
+                .inputs {
+                    height: 45px;
+                    width: 60%;
+                    border: 1px solid #727272;
+                    padding-left: 1rem;
+                    border-radius: 0.3rem;
+                }
+
+                .button {
+                    height: 45px;
+                    width: 30%;
+                    border: 1px solid #0052CC;
+                    background-color: #0052CC;
+                    color: white;
+                    margin-left: 1rem;
+                    border-radius: 0.3rem;
+                }
+
+                p {
+                    color: #172b4d;
+                    margin-top: 1.2rem;
+                }
+
+                h6 {
+                    color: #0052CC;
+                    margin-top: 4rem;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    .secondpart {
+        padding-right: 0 !important;
+        
+        .whole {
+
+            .writing {
+                p {
+                    font-size: 16px;
+                    font-weight: 500;
+                    color: #172b4d;
+                    margin-top: 1rem;
+                }
+
+                h1 {
+                    font-size: 42px;
+                    color: #172b4d;
+                }
+
+                h5 {
+                    margin-top: 1.7rem;
+                    font-size: 20px;
+                    font-weight: 400;
+                    color: #172b4d;
+                }
+            }
+
+            .box-info {
+                .dots {
+                    display: flex;
+                    justify-content: flex-end;
+                    margin-bottom: 0.6rem;
+
+                    .circle {
+                        height: 10px;
+                        width: 10px;
+                        border-radius: 50%;
+                        background-color: rgb(29, 29, 29);
+                        margin-left: 0.2rem;
+                    }
+                }
+
+                .box {
+                    .cards {
+                        .card {
+                            padding: 1rem 2rem;
+                            margin-bottom: 0.4rem;
+
+                            h2 {
+                                font-size: 24px;
+                                color: #172b4d;
+                            }
+
+                        }
+
+                        .card:hover {
+                            border-left: 6px solid #005fcc;
+                        }
+                    }
+
+                    .card-detail-container{
+                        height: 485px;
+                        background-color: white;
+                        border-radius: 0.6rem;
+                    }
+                }
+            }
+        }
+    }
+
+}
