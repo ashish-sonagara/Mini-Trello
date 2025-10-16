@@ -34,15 +34,18 @@ export class TaskFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const taskId = this.activatedRoute.snapshot.queryParamMap.get('id');
-    console.log(taskId);
-    const task = this.taskService.tasks$.value.filter(t => {
-      return t.id === Number(taskId)
-    })
-    if (task) {
-      console.log("task i got matches the id", task);
-      this.newTask = task[0]
-      this.isediting = true;
+    const taskIdStr = this.activatedRoute.snapshot.queryParamMap.get('id');
+    const taskId = taskIdStr !== null ? Number(taskIdStr) : null;
+
+    if (taskId !== null) {
+      const task = this.taskService.tasks$.value.filter(t => t.id === taskId);
+      if (task.length) {
+        console.log("task i got matches the id", task);
+        this.newTask = task[0];
+        this.isediting = true;
+      }
+    } else {
+      console.warn('No taskId provided in query params');
     }
   }
 
