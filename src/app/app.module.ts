@@ -17,6 +17,8 @@ import { TaskComponent } from './dashboard/task/task.component';
 import { StatsComponent } from './dashboard/stats/stats.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { TaskFormComponent } from './task-form/task-form.component'
+import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
+import { provideToastr, ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -37,10 +39,15 @@ import { TaskFormComponent } from './task-form/task-form.component'
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(),
 
   ],
-  providers: [],
+  providers: [ 
+    provideAnimations(), // required animations providers
+    provideToastr(),
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

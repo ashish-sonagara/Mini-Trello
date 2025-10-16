@@ -3,6 +3,7 @@ import { Task } from "../interface/task.interface";
 import { User } from "../interface/user.interface";
 import { BehaviorSubject } from "rxjs";
 import { Router } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
 
 @Injectable({
     providedIn: 'root'
@@ -113,6 +114,7 @@ export class TaskService {
 
     constructor(
         private router: Router,
+        private toastrService : ToastrService
     ) { }
 
     // storeTaskToSessionStorage(task : Task) {
@@ -120,6 +122,11 @@ export class TaskService {
         let taskList = this.tasks$.value;
         console.log("this is the first time adding task to the session storage", taskList)
         sessionStorage.setItem('tasks', JSON.stringify(taskList));
+        // (message, title, ToastConfig)
+        this.toastrService.success("Task added Succesfully" , "success message" , {
+            timeOut : 2000,
+            progressBar : true
+        });
     }
 
     getAssignedTaskFromSessionStorage(email: string): Task[] {
