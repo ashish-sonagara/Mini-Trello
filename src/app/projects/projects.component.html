@@ -73,13 +73,19 @@
 
                         <!-- Scrollable comments section -->
                         <div class="comments-section">
-                            <div class="comment-item" *ngFor="let comment of item.comments">
+                            <div class="comment-item" *ngFor="let comment of item.comments ; let i = index ">
                                 <div class="comment-content" *ngIf="!item.noComment">
                                     <div class="comment-meta">
                                         <span class="author-name">{{comment.commentAuthor}}</span>
                                         <span class="comment-time">{{comment.date | date: 'M/d/yy, h:mm a'}}</span>
                                     </div>
                                     <p class="comment-text">{{comment.description}}</p>
+
+                                    <div class="delete" (click)="deleteComment(i ,item.id )">
+                                        <img width="24" height="24"
+                                            src="https://img.icons8.com/material/24/filled-trash.png"
+                                            alt="Delete Comment" />
+                                    </div>
                                 </div>
                             </div>
 
