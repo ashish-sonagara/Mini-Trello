@@ -1,10 +1,12 @@
-<nav class="navbar navbar-expand-lg trello-navbar">
+<nav class="navbar navbar-expand-lg trello-navbar" *ngIf="!loggedIn">
     <div class="container-fluid justify-content-between align-items-center">
 
         <!-- Left brand -->
         <div class="brand-group d-flex align-items-center">
             <a class="navbar-brand d-flex align-items-center ms-2" routerLink="/dashboard">
-                <img width="24" height="24" src="https://img.icons8.com/external-tal-revivo-color-tal-revivo/24/external-trello-a-web-based-list-making-application-for-multi-platform-logo-color-tal-revivo.png" alt="external-trello-a-web-based-list-making-application-for-multi-platform-logo-color-tal-revivo"/>
+                <img width="24" height="24"
+                    src="https://img.icons8.com/external-tal-revivo-color-tal-revivo/24/external-trello-a-web-based-list-making-application-for-multi-platform-logo-color-tal-revivo.png"
+                    alt="external-trello-a-web-based-list-making-application-for-multi-platform-logo-color-tal-revivo" />
                 <span class="ms-1 fw-bold">Mini-Torello</span>
             </a>
         </div>
@@ -24,8 +26,37 @@
         <div class="actions d-flex align-items-center">
             <div class="me-3 login-link" (click)="loginButton()">Log in</div>
             <button class="btn btn-primary trello-btn">Get Trello for free</button>
-            <div class="me-3 login-link" (click)="Logout()">Log Out</div>
+        </div>
 
+    </div>
+</nav>
+
+<nav class="navbar navbar-expand-lg trello-navbar" *ngIf="loggedIn">
+    <div class="container-fluid justify-content-between align-items-center">
+
+        <!-- Left brand -->
+        <div class="brand-group d-flex align-items-center">
+            <a class="navbar-brand d-flex align-items-center ms-2" routerLink="/dashboard">
+                <img width="24" height="24"
+                    src="https://img.icons8.com/external-tal-revivo-color-tal-revivo/24/external-trello-a-web-based-list-making-application-for-multi-platform-logo-color-tal-revivo.png"
+                    alt="external-trello-a-web-based-list-making-application-for-multi-platform-logo-color-tal-revivo" />
+                <span class="ms-1 fw-bold">Mini-Torello</span>
+            </a>
+        </div>
+
+        <!-- Center nav -->
+        <div class="collapse navbar-collapse center-nav">
+            <ul class="navbar-nav mx-auto">
+                <input type="text" placeholder="Search for Task" class="searchInput" [(ngModel)]="searchText">
+                <button (click)="searchedInput()"> Search </button>
+            </ul>
+
+        </div>
+
+        <!-- Right actions -->
+        <div class="actions d-flex align-items-center">
+            <button class="btn btn-primary trello-btn">Get Trello for free</button>
+            <div class="me-3 login-link" (click)="Logout()">Log Out</div>
         </div>
 
     </div>

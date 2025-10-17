@@ -9,8 +9,7 @@ import { Router } from "@angular/router";
 export class HeaderService {
 
     userLogged = new BehaviorSubject<boolean>(false);
-    // isHome = new BehaviorSubject<boolean>(true);
-    // userLogOut = new BehaviorSubject<boolean>(false);
+    // searchText = new BehaviorSubject<string>("")
 
     constructor(private userService: UserService , private router : Router) { }
 
@@ -19,12 +18,14 @@ export class HeaderService {
         if (currUser) {
             this.userLogged.next(true);
         }
+        sessionStorage.setItem('userLoggedIn' , JSON.stringify(this.userLogged));
     }
 
     userLoggedOut() {
         this.userService.deleteToken();
         this.router.navigate(['/home']);
         this.userLogged.next(false)
+        sessionStorage.setItem('userLoggedIn' , JSON.stringify(this.userLogged))
     }
 
 }       

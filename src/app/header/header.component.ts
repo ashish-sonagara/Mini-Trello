@@ -10,11 +10,16 @@ import { UserService } from '../services/user.service';
 })
 export class HeaderComponent implements OnInit {
 
+  searchText: string = "";
+  loggedIn : boolean  = false;
   constructor(private header: HeaderService, private route: Router, private userService: UserService) { }
 
   ngOnInit(): void {
-
+    this.header.userLogged.subscribe(res => {
+      this.loggedIn = res;
+    })
   }
+
 
   loginButton(): void {
     const current = this.header.userLogged.value;
@@ -34,6 +39,11 @@ export class HeaderComponent implements OnInit {
     else {
       alert("Can't logout Before Logging In")
     }
+  }
+
+  searchedInput() {
+    console.log(this.searchText)
+    // this.header.searchText.next(this.searchText)
   }
 
 }

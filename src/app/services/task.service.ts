@@ -111,6 +111,7 @@ export class TaskService {
 
     tasks$: BehaviorSubject<Task[]> = new BehaviorSubject<Task[]>(this.tasks);
     taskId: BehaviorSubject<number> = new BehaviorSubject<number>(this.tasks$.value.length)
+    searchTaskList : BehaviorSubject<Task[]> = new BehaviorSubject<Task[]>([])
 
     constructor(
         private router: Router,
@@ -123,7 +124,7 @@ export class TaskService {
         console.log("this is the first time adding task to the session storage", taskList)
         sessionStorage.setItem('tasks', JSON.stringify(taskList));
         // (message, title, ToastConfig)
-        this.toastrService.success("Task added Succesfully" , "success message" , {
+        this.toastrService.success("Task added Succesfully" , "Success Message" , {
             timeOut : 2000,
             progressBar : true
         });
