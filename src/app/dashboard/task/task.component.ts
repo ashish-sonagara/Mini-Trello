@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
 import { Task } from 'src/app/interface/task.interface';
 import { AuthUser, User } from 'src/app/interface/user.interface';
+import { HeaderService } from 'src/app/services/header.service';
 import { TaskService } from 'src/app/services/task.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -28,7 +29,12 @@ export class TaskComponent implements OnInit {
     assignedProject: ''
   }
 
-  constructor(private taskService: TaskService, private userService: UserService, private router: Router) { }
+  constructor(
+    private taskService: TaskService, 
+    private userService: UserService, 
+    private router: Router,
+    private headerService : HeaderService
+  ) { }
 
   ngOnInit(): void {
     const token = this.userService.getTokenFromSessionStorage();
@@ -39,13 +45,6 @@ export class TaskComponent implements OnInit {
       this.userData = token;
     }
 
-    // in this we are assigning task directly from the session storage
-
-    // this.taskList = this.taskService.getAssignedTaskFromSessionStorage(this.userData.email);
-    // console.log("this is the task list in task component" , this.taskList)
-
-
-    // using the subject which is in the taskService 
     combineLatest([
       this.taskService.tasks$,
       this.userService.currentUser$

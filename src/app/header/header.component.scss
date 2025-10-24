@@ -99,6 +99,8 @@
         }
 
         .actions {
+            position: relative;
+
             .login-link {
                 color: #172b4d;
                 text-decoration: none;
@@ -123,6 +125,27 @@
             .trello-btn:hover {
                 background-color: rgba(0, 101, 255, 0.99);
                 border-color: #0065FF;
+            }
+
+            #profile {
+                height: 30px;
+                width: 30px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+                margin-left: 1.5rem;
+
+                img {
+                    object-fit: contain;
+                }
+            }
+
+            .profile-component {
+                z-index: 100;
+                position: absolute;
+                right: 0%;
+                top: 140%;
             }
         }
 

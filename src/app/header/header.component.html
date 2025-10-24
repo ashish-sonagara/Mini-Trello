@@ -56,7 +56,10 @@
         <!-- Right actions -->
         <div class="actions d-flex align-items-center">
             <button class="btn btn-primary trello-btn">Get Trello for free</button>
-            <div class="me-3 login-link" (click)="Logout()">Log Out</div>
+            <!-- <div class="me-3 login-link" (click)="Logout()">Log Out</div> -->
+            <div id="profile" (click)="showProfileComponent()"><img src="https://img.icons8.com/fluency/48/user-male-circle--v1.png"
+                    alt="user-male-circle--v1" /></div>
+            <app-profile *ngIf="showProfile" class="profile-component"></app-profile>
         </div>
 
     </div>

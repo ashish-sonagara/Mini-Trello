@@ -12,6 +12,8 @@ export class HeaderComponent implements OnInit {
 
   searchText: string = "";
   loggedIn : boolean  = false;
+  showProfile : boolean = false;
+
   constructor(private header: HeaderService, private route: Router, private userService: UserService) { }
 
   ngOnInit(): void {
@@ -31,19 +33,24 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  Logout() {
-    const currUser = this.header.userLogged.value;
-    if (currUser) {
-      this.header.userLoggedOut();
-    }
-    else {
-      alert("Can't logout Before Logging In")
-    }
+  // Logout() {
+  //   const currUser = this.header.userLogged.value;
+  //   if (currUser) {
+  //     this.header.userLoggedOut();
+  //   }
+  //   else {
+  //     alert("Can't logout Before Logging In")
+  //   }
+  // }
+
+  showProfileComponent(){
+    this.showProfile = !this.showProfile
   }
 
+
   searchedInput() {
-    console.log(this.searchText)
-    // this.header.searchText.next(this.searchText)
+    console.log(this.searchText);
+    this.header.searchText.next(this.searchText);
   }
 
 }
