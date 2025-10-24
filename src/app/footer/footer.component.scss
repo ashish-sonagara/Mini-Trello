@@ -1,0 +1,23 @@
+.container-fluid {
+    background-color: rgb(23 43 77);
+    height: 200px;
+    .footerContainer {
+        color: white;
+
+        .column1{
+            padding: 1.6rem 0rem 1.2rem 0rem;
+
+            h6{
+                font-size: 15px;
+            }
+            p{
+                font-size: 13px;
+            }
+        }
+    }
+    .hr{
+        background-color: #9b9b9b;
+        height: 1px;
+        width: 100%;
+    }
+}

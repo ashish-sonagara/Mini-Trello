@@ -7,6 +7,7 @@ import { Task } from 'src/app/interface/task.interface';
 import { AuthUser, User } from 'src/app/interface/user.interface';
 import { ProjectService } from 'src/app/services/project.service';
 import { UserService } from 'src/app/services/user.service';
+import { Modal } from 'bootstrap';
 
 @Component({
   selector: 'app-board',
@@ -51,7 +52,7 @@ export class BoardComponent implements OnInit {
 
   onFormSubmission(form: NgForm) {
     if (form.valid) {
-      console.log( " new project added --" , form.value)
+      console.log(" new project added --", form.value)
       let project: Project = {
         id: this.projectService.projectId$.value,
         title: form.value.title,
@@ -62,19 +63,29 @@ export class BoardComponent implements OnInit {
         this.projectService.addProjectToSubject(project);
         form.reset()
       }
-      else{
+      else {
         alert("U dont have access To Assign project!")
         console.error("U dont have access To Assign project!")
       }
     }
   }
 
-  deleteProject(index : number){
+  deleteProject(index: number) {
     this.projectService.deleteProjectFromSubject(index);
   }
 
-  goingToTheprojectPage(title : string){
-    sessionStorage.setItem('title' , JSON.stringify(title));
+  goingToTheprojectPage(title: string) {
+    sessionStorage.setItem('title', JSON.stringify(title));
     // this.projectService.getProjectTaskList(title);
   }
+
+  // openShareProjectModal(event: Event) {
+  //   // this stopPropogation() method stops the any event to run for eg if we click on share Project modal click will generally close the Modal.
+  //   event.stopPropagation();
+  //   let projectModal = document.getElementById('staticBackdrop');
+  //   let shareModal = new Modal(document.getElementById('shareProject')!);
+
+  //   shareModal.show()
+  // }
+
 }

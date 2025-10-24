@@ -1,8 +1,8 @@
 <div class="main-content">
     <!-- Recently viewed -->
-    <div class="head">
+    <!-- <div class="head">
         <h2>Hii , {{userData.name}} 👋</h2>
-    </div>
+    </div> -->
     <section class="recently-viewed">
         <div class="recently-viewed-head">
             <h5 class="section-title">
@@ -24,7 +24,7 @@
                 <div class="card-footer">
                     <h6>{{ project.title }}</h6>
                     <div class="dustbin" (click)="deleteProject(i)">
-                        <img src="https://img.icons8.com/ios-glyphs/30/filled-trash.png" alt="filled-trash"/>
+                        <img src="https://img.icons8.com/ios-glyphs/30/filled-trash.png" alt="filled-trash" />
                     </div>
                 </div>
             </div>
@@ -66,13 +66,15 @@
     </section>
 </div>
 
-<!-- Modal -->
+<!-- Add Project Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Project Here..</h1>
+                <!-- <div class="share-Project" (click)="openShareProjectModal($event)"> Share <img
+                        src="https://img.icons8.com/fluency-systems-regular/48/share-3.png" alt="share-3" /></div> -->
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -105,3 +107,44 @@
         </div>
     </div>
 </div>
+
+<!-- share Project Modal -->
+<!-- <div class="modal fade" id="shareProject" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="shareProjectLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="shareProjectLabel">Share Project Here..</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="symbols">
+                    <div class="other-links"> <img width="28" height="28"
+                            src="https://img.icons8.com/color/48/google-logo.png" alt="google-logo"
+                            style="margin-right: 0.2rem;" /></div>
+                    <div class="other-links"> <img width="28" height="28"
+                            src="https://img.icons8.com/color/48/microsoft.png" alt="microsoft"
+                            style="margin-right: 0.2rem;" />
+                    </div>
+                    <div class="other-links"> <img width="28" height="28"
+                            src="https://img.icons8.com/ios-filled/50/mac-os.png" alt="mac-os"
+                            style="margin-right: 0.2rem;" />
+                    </div>
+                    <div class="other-links"> <img width="24" height="24"
+                            src="https://img.icons8.com/external-tal-revivo-color-tal-revivo/24/external-slack-replace-email-text-messaging-and-instant-messaging-for-your-team-logo-color-tal-revivo.png"
+                            alt="Slack" style="margin-right: 0.4rem;" /></div>
+                </div>
+                <div class="names">
+                    <div>Google</div>
+                    <div>Microsoft</div>
+                    <div>Apple</div>
+                    <div>Slack</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div> -->

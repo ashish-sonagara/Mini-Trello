@@ -15,7 +15,7 @@ const routes: Routes = [
   {path : 'project' , component : ProjectsComponent},
   {path : 'taskForm' , component : TaskFormComponent},
   {path : 'dashboard' , component : DashboardComponent , canActivate : [authGuard]},
-  {path : '**' , redirectTo : '/home' , pathMatch : 'full'}
+  {path : '**' , redirectTo : '/home' , pathMatch : 'full'}   
 ];
 
 @NgModule({

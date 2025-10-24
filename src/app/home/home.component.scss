@@ -63,7 +63,7 @@
 
     .secondpart {
         padding-right: 0 !important;
-        
+
         .whole {
 
             .writing {
@@ -120,7 +120,7 @@
                         }
                     }
 
-                    .card-detail-container{
+                    .card-detail-container {
                         height: 485px;
                         background-color: white;
                         border-radius: 0.6rem;
@@ -130,4 +130,41 @@
         }
     }
 
+    .thirdpart {
+
+        .center {
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 7rem;
+
+            .input {
+                margin-top: 2rem;
+
+                .inputs {
+                    height: 45px;
+                    width: 60%;
+                    border: 1px solid #727272;
+                    padding-left: 1rem;
+                    border-radius: 0.3rem;
+                }
+
+                .button {
+                    height: 45px;
+                    width: 30%;
+                    border: 1px solid #0052CC;
+                    background-color: #0052CC;
+                    color: white;
+                    margin-left: 1rem;
+                    border-radius: 0.3rem;
+                }
+
+                p {
+                    color: #172b4d;
+                    margin-top: 1.2rem;
+                }
+
+            }
+        }
+
+    }
 }

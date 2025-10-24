@@ -19,6 +19,8 @@ import { ProjectsComponent } from './projects/projects.component';
 import { TaskFormComponent } from './task-form/task-form.component'
 import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr, ToastrModule } from 'ngx-toastr';
+import { FooterComponent } from './footer/footer.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { provideToastr, ToastrModule } from 'ngx-toastr';
     TaskComponent,
     StatsComponent,
     ProjectsComponent,
-    TaskFormComponent
+    TaskFormComponent,
+    FooterComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
