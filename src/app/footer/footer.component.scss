@@ -1,23 +1,168 @@
 .container-fluid {
     background-color: rgb(23 43 77);
-    height: 200px;
+    height: 210px;
+
     .footerContainer {
         color: white;
 
-        .column1{
+        .column1 {
             padding: 1.6rem 0rem 1.2rem 0rem;
 
-            h6{
+            h5 {
+                font-size: 13px;
+            }
+
+            h6 {
                 font-size: 15px;
             }
-            p{
+
+            p {
                 font-size: 13px;
             }
         }
     }
-    .hr{
+
+    .hr {
         background-color: #9b9b9b;
         height: 1px;
         width: 100%;
+    }
+
+    .footerContainer2 {
+        color: white;
+
+        .column1 {
+            padding: 1.6rem 0rem 1.2rem 0rem;
+
+            .language {
+                width: 140px;
+                height: 30px;
+                position: relative;
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                border: 1px solid rgba(255, 255, 255, 0.15);
+                border-radius: 12px;
+                padding: 0.75rem 1.25rem;
+                transition: all 0.3s ease;
+                cursor: pointer;
+
+                &:hover {
+                    background: rgba(255, 255, 255, 0.12);
+                    border-color: rgba(255, 255, 255, 0.25);
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+                }
+
+                .language-icon {
+                    color: rgba(255, 255, 255, 0.9);
+                    flex-shrink: 0;
+                    transition: transform 0.3s ease;
+                }
+
+                &:hover .language-icon {
+                    transform: rotate(15deg);
+                }
+
+                select {
+                    background: transparent;
+                    border: none;
+                    color: white;
+                    font-size: 0.95rem;
+                    font-weight: 500;
+                    outline: none;
+                    cursor: pointer;
+                    padding-right: 0.5rem;
+                    appearance: none;
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    min-width: 140px;
+
+                    option {
+                        background-color: white;
+                        color: #2a2a3e;
+                        padding: 0.75rem;
+                        font-size: 0.95rem;
+
+                        &:hover {
+                            background: #3a3a4e;
+                        }
+
+                        &:checked {
+                            background: #4a4a5e;
+                            font-weight: 600;
+                        }
+                    }
+                }
+
+                .dropdown-arrow {
+                    color: rgba(255, 255, 255, 0.7);
+                    flex-shrink: 0;
+                    pointer-events: none;
+                    transition: transform 0.3s ease;
+                }
+
+                &:hover .dropdown-arrow {
+                    transform: translateY(2px);
+                    color: rgba(255, 255, 255, 0.9);
+                }
+            }
+
+            .personal {
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+                gap: 1rem;
+
+                a {
+                    color: white;
+                    font-size: 13px;
+                    text-decoration: none;
+                }
+
+                a:hover {
+                    text-decoration: underline;
+                }
+            }
+
+            .social-apps {
+                height: 100%;
+                width: 100%;
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+                // gap: 2rem;
+
+                .app {
+                    height: 35px;
+                    width: 35px;
+                    border: 1px solid white;
+                    border-radius: 50%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    position: relative;
+
+                    svg {
+                        transition: all 0.3s ease;
+                    }
+
+                    &:hover {
+                        background: rgba(255, 255, 255, 0.1);
+                        border-color: rgba(255, 255, 255, 0.8);
+
+                        svg {
+                            transform: scale(0.8);
+                        }
+                    }
+
+                    &:active {
+                        transform: scale(0.95);
+                    }
+                }
+            }
+        }
     }
 }
