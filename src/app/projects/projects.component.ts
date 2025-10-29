@@ -47,6 +47,7 @@ export class ProjectsComponent implements OnInit {
     }
     else {
       this.userData = token;
+      this.newComment.commentAuthor = this.userData.name
     }
 
     let title = sessionStorage.getItem('title');

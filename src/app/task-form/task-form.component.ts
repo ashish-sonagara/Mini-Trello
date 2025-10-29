@@ -46,6 +46,11 @@ export class TaskFormComponent implements OnInit {
       }
     } else {
       console.warn('No taskId provided in query params');
+    } 
+
+    let projectTitle : string | null = sessionStorage.getItem('title');
+    if (projectTitle){
+      this.newTask.assignedProject = JSON.parse(projectTitle)
     }
   }
 
