@@ -21,6 +21,7 @@ import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-br
 import { provideToastr, ToastrModule } from 'ngx-toastr';
 import { FooterComponent } from './footer/footer.component';
 import { ProfileComponent } from './profile/profile.component';
+import { KanbanBoardComponent } from './kanban-board/kanban-board.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ProfileComponent } from './profile/profile.component';
     ProjectsComponent,
     TaskFormComponent,
     FooterComponent,
-    ProfileComponent
+    ProfileComponent,
+    KanbanBoardComponent
   ],
   imports: [
     BrowserModule,
