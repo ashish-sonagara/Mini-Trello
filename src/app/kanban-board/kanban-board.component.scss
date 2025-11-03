@@ -117,15 +117,18 @@
                 overflow-y: hidden;
                 padding: 1rem;
                 width: auto;
+                gap: 1rem;
 
                 .task-card {
                     flex: 0 0 auto;
                     width: 280px;
+                    max-height: calc(100vh - 200px); // Adjust based on your header + padding
                     background-color: #f1f2f4;
                     border-radius: 12px;
                     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
                     transition: all 0.2s ease;
-                    overflow: hidden;
+                    display: flex;
+                    flex-direction: column;
 
                     .card-header {
                         height: 50px;
@@ -135,6 +138,7 @@
                         align-items: center;
                         padding: 0 1rem;
                         background-color: transparent;
+                        flex-shrink: 0;
 
                         h5 {
                             font-size: 14px;
@@ -172,9 +176,53 @@
                         }
                     }
 
+                    .taskList {
+                        padding: 0.5rem 0.75rem;
+                        flex: 1;
+                        overflow-y: auto;
+                        overflow-x: hidden;
+                        min-height: 0;
+
+                        &::-webkit-scrollbar {
+                            width: 8px;
+                        }
+
+                        &::-webkit-scrollbar-track {
+                            background: transparent;
+                        }
+
+                        &::-webkit-scrollbar-thumb {
+                            background: #d0d4db;
+                            border-radius: 10px;
+
+                            &:hover {
+                                background: #b3bac5;
+                            }
+                        }
+
+                        .task-item {
+                            background-color: #fff;
+                            padding: 0.75rem;
+                            border-radius: 8px;
+                            margin-bottom: 0.4rem;
+                            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+                            transition: all 0.15s ease;
+                            cursor: pointer;
+
+                            &:hover {
+                                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+                            }
+
+                            &:last-child {
+                                margin-bottom: 0;
+                            }
+                        }
+                    }
+
                     .add-card {
                         padding: 0.5rem 0.75rem;
                         animation: fadeIn 0.2s ease;
+                        flex-shrink: 0;
 
                         .input {
                             width: 100%;
@@ -235,6 +283,7 @@
                         border-radius: 8px;
                         margin: 0.25rem;
                         min-height: 36px;
+                        flex-shrink: 0;
 
                         &:hover {
                             background-color: #d0d4db;
@@ -277,48 +326,6 @@
                             }
                         }
                     }
-
-                    .taskList {
-                        padding: 0.5rem 0.75rem;
-                        max-height: 400px;
-                        overflow-y: auto;
-                        overflow-x: hidden;
-
-                        &::-webkit-scrollbar {
-                            width: 8px;
-                        }
-
-                        &::-webkit-scrollbar-track {
-                            background: transparent;
-                        }
-
-                        &::-webkit-scrollbar-thumb {
-                            background: #d0d4db;
-                            border-radius: 10px;
-
-                            &:hover {
-                                background: #b3bac5;
-                            }
-                        }
-
-                        .task-item {
-                            background-color: #fff;
-                            padding: 0.75rem;
-                            border-radius: 8px;
-                            margin-bottom: 0.5rem;
-                            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
-                            transition: all 0.15s ease;
-                            cursor: pointer;
-
-                            &:hover {
-                                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
-                            }
-
-                            &:last-child {
-                                margin-bottom: 0;
-                            }
-                        }
-                    }
                 }
 
                 @keyframes fadeIn {
@@ -333,24 +340,45 @@
                     }
                 }
 
-                .add-task {
+                .add-another-list {
                     flex: 0 0 auto;
-                    height: 100%;
-                    width: 100px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    // background-color: #f5f5f5;
-                    border-radius: 0.3rem;
-                    cursor: pointer;
-                    transition: 0.2s ease;
+                    width: 180px;
+                    background-color: rgb(241, 242, 244, 0.6);
+                    border-radius: 12px;
+                    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+                    transition: all 0.2s ease;
 
-                    img {
+                    .card-header {
                         height: 50px;
-                        width: 50px;
-                        object-fit: contain;
+                        width: 100%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        padding: 0 1rem;
+                        background-color: transparent;
+                        gap: 1rem;
+
+                        h5 {
+                            font-size: 14px;
+                            font-weight: 600;
+                            color: #172b4d;
+                            letter-spacing: 0;
+                            margin-top: 0.6rem;
+                        }
+
+                        &:hover {
+                            background-color: #d0d4db;
+                            border-radius: 12px;
+                            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+                        }
+
+                        &:active {
+                            background-color: #c1c7d0;
+                        }
                     }
+
                 }
+
             }
         }
 

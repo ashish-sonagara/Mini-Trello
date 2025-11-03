@@ -21,25 +21,29 @@
                 </div>
             </div>
             <div class="tasks">
-                <div class="task-card">
+                <div class="task-card" *ngFor="let card of cardList">
                     <div class="card-header">
-                        <h5>To Do</h5>
+                        <h5>{{card.title}}</h5>
                         <div class="menu">
                             <div></div>
                             <div></div>
                             <div></div>
                         </div>
                     </div>
-                    <!-- <div class="taskList" *ngFor="let task of taskList">
-                    <div class="task-item">Example task item</div>
-                    </div> -->
-                    <div class="add-card" *ngIf="wantedToAddCard">
-                        <div class="input">
-                            <input type="text" placeholder="Enter the title card...">
+                    <div class="taskList">
+                        <div class="task-item" *ngFor="let task of card.listOfTask">
+                            {{task.taskName}}
                         </div>
-                        <button class="primary-btn" (click)="toggleToAddCard()">Add Card</button>
                     </div>
-                    <div class="add-card-click" *ngIf="!wantedToAddCard" (click)="toggleToAddCard()">
+                    <div class="add-card" *ngIf="card.wantedToAddCard">
+                        <form [formGroup]="addTaskForm" (ngSubmit)="submitTask(card.id , card.title)">
+                            <div class="input">
+                                <input type="text" placeholder="Enter the title card..." formControlName="taskName">
+                            </div>
+                            <button class="primary-btn" type="submit" [disabled]="addTaskForm.invalid">Add Card</button>
+                        </form>
+                    </div>
+                    <div class="add-card-click" *ngIf="!card.wantedToAddCard" (click)="toggleToAddCard(card.id)">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none">
@@ -59,10 +63,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="add-task" (click)="redirectToTaskform()">
-                    <img width="64" height="64"
-                        src="https://img.icons8.com/external-tal-revivo-tritone-tal-revivo/64/external-add-button-template-for-website-and-service-basic-tritone-tal-revivo.png"
-                        alt="external-add-button-template-for-website-and-service-basic-tritone-tal-revivo" />
+                
+                <div class="add-another-list">
+                    <div class="card-header">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 5v14M5 12h14" stroke="#6c757d" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                        <h5>Add Another List</h5>
+                    </div>
+
                 </div>
             </div>
         </div>

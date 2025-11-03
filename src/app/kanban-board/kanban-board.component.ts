@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommentInterface } from '../interface/comment.interface';
 import { Task } from '../interface/task.interface';
@@ -8,6 +8,8 @@ import { CommentService } from '../services/comment.service';
 import { ProjectService } from '../services/project.service';
 import { TaskService } from '../services/task.service';
 import { UserService } from '../services/user.service';
+import { CardService } from '../services/card.service';
+import { Card, CardTask } from '../interface/card.interface';
 
 @Component({
   selector: 'app-kanban-board',
@@ -17,18 +19,33 @@ import { UserService } from '../services/user.service';
 export class KanbanBoardComponent {
   projectTitle: string = "";
   userData !: AuthUser;
-  projectBasedTaskList: Task[] = [];
-  
-  currentCommentTaskId: number | null = null;
-  wantedToAddCard : boolean = true;
+  // projectBasedTaskList: Task[] = [];
+  newTask: CardTask = {
+    id: 0,
+    taskName: '',
+    assignedCard: ''
+  }
+  addTaskForm !: FormGroup;
+
+  /**
+   * HERE IS THE NEW DECLARED VARIABLES FOR THE TRELLO STYLE BOARD CARDS
+   */
+  wantedToAddCard: boolean = true;
+  cardList: Card[] = []
 
   constructor(
     private taskService: TaskService,
     private userService: UserService,
     private router: Router,
     private projectService: ProjectService,
-    private commentService: CommentService
-  ) { }
+    private commentService: CommentService,
+    private cardService: CardService,
+    private fb: FormBuilder
+  ) {
+    this.addTaskForm = this.fb.group({
+      taskName: ["", Validators.required]
+    })
+  }
 
   ngOnInit(): void {
     const token = this.userService.getTokenFromSessionStorage();
@@ -37,42 +54,49 @@ export class KanbanBoardComponent {
     }
     else {
       this.userData = token;
-      // this.newComment.commentAuthor = this.userData.name
     }
 
-    let title = sessionStorage.getItem('title');
-    if (title) {
-      this.projectTitle = JSON.parse(title);
-      this.projectService.getProjectTaskList(this.projectTitle);
-    }
-    // using the subject which is in the taskService 
-    this.projectService.projectTaskList$.subscribe(res => {
-      this.projectBasedTaskList = res.map(task => {
-        return { ...task, flipped: false, noComment: !task.comments || task.comments.length === 0 }    // if task is undefined or empty nocomments = true
-      });
-
+    this.cardService.cards$.subscribe(res => {
+      this.cardList = res
+      console.log("inside the card component cards --> ", this.cardList);
     })
-    console.log("inside the project component ---", this.projectBasedTaskList)
+
   }
 
-  redirectToTaskform() {
-    this.router.navigate(['/taskForm']);
+  submitTask(id: number, title: string) {
+    if (this.addTaskForm.valid) {
+      console.log(this.addTaskForm.value);
+      this.newTask = {
+        id: 1,
+        taskName: this.addTaskForm.value.taskName,
+        assignedCard: title
+      }
+      this.cardList = this.cardList.map(t => {
+        if (t.id === id) {
+          return {
+            ...t, listOfTask: [...(t.listOfTask || []), this.newTask]
+          }
+        }
+        else {
+          return t
+        }
+      })
+      this.cardService.updatedCardList(this.cardList)
+      this.addTaskForm.reset()
+      this.toggleToAddCard(id);
+    }
   }
 
-  deleteTask(index: number) {
-    this.taskService.deleteTaskFromSubject(index);
-  }
-
-  taskCompleted(index: number) {
-    this.taskService.taskCompleted(index);
-  }
-
-  editCurrentTask(index: number) {
-    this.taskService.editCurrentTask(index)
-  }
-
-  toggleToAddCard(){
-    this.wantedToAddCard = !this.wantedToAddCard
+  toggleToAddCard(index: number) {
+    this.cardList = this.cardList.map(t => {
+      if (t.id === index) {
+        t.wantedToAddCard = !t.wantedToAddCard
+        return t
+      }
+      else {
+        return t
+      }
+    })
   }
 
 }

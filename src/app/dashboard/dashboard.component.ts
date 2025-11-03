@@ -5,6 +5,7 @@ import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } fro
 import { Observable } from 'rxjs';
 import { TaskService } from '../services/task.service';
 import { ProjectService } from '../services/project.service';
+import { CardService } from '../services/card.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +20,8 @@ export class DashboardComponent implements OnInit {
     private headerService: HeaderService,
     private userService: UserService,
     private taskService: TaskService,
-    private projectService : ProjectService
+    private projectService : ProjectService,
+    private cardService : CardService
   ) { 
   }
 
@@ -36,6 +38,9 @@ export class DashboardComponent implements OnInit {
 
     // call the storeProjectToSessionStorage method to store the inital project to session storage.
     this.projectService.storeProjectToSessionStorage()
+
+    // call the storeCardToSessionStorage() method to store the kanban board style to session storage when the app starts
+    this.cardService.storeCardToSessionStorage()
   }
 
   selectedItem(item: string) {
