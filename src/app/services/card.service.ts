@@ -9,19 +9,19 @@ export class CardService {
 
     private card: Card[] = JSON.parse(sessionStorage.getItem('cards') || 'null')
         ?? [{
-            id: 1,
+            id: 0,
             title: "To Do",
             wantedToAddCard: false,
             listOfTask: []
         },
         {
-            id: 2,
+            id: 1,
             title: "Doing",
             wantedToAddCard: false,
             listOfTask: []
         },
         {
-            id: 3,
+            id: 2,
             title: "Done",
             wantedToAddCard: false,
             listOfTask: []
@@ -29,6 +29,7 @@ export class CardService {
         ]
 
     cards$: BehaviorSubject<Card[]> = new BehaviorSubject<Card[]>(this.card);
+    cardsLength$: BehaviorSubject<number> = new BehaviorSubject<number>(this.card.length)
 
     storeCardToSessionStorage() {
         let CardList: Card[] = this.cards$.value;
@@ -51,4 +52,12 @@ export class CardService {
         this.cards$.next(newCardList);
         this.storeCardToSessionStorage()
     }
+
+    addAnotherCard(newCard: Card) {
+        let cardList: Card[] = [...this.cards$.value, newCard];
+        this.cards$.next(cardList);
+        this.cardsLength$.next(cardList.length)
+        this.storeCardToSessionStorage()
+    }
+
 }   

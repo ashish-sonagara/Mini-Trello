@@ -19,7 +19,7 @@ import { Card, CardTask } from '../interface/card.interface';
 export class KanbanBoardComponent {
   projectTitle: string = "";
   userData !: AuthUser;
-  // projectBasedTaskList: Task[] = [];
+  // New Task for the Card 
   newTask: CardTask = {
     id: 0,
     taskName: '',
@@ -27,6 +27,15 @@ export class KanbanBoardComponent {
   }
   addTaskForm !: FormGroup;
 
+  // Another list 
+  newList: Card = {
+    id: 0,
+    title: '',
+    wantedToAddCard: false,
+    listOfTask: []
+  }
+  addAnotherList !: FormGroup;
+  toggleAddList: boolean = false;
   /**
    * HERE IS THE NEW DECLARED VARIABLES FOR THE TRELLO STYLE BOARD CARDS
    */
@@ -44,6 +53,9 @@ export class KanbanBoardComponent {
   ) {
     this.addTaskForm = this.fb.group({
       taskName: ["", Validators.required]
+    })
+    this.addAnotherList = this.fb.group({
+      listName: ["", Validators.required]
     })
   }
 
@@ -66,11 +78,12 @@ export class KanbanBoardComponent {
   submitTask(id: number, title: string) {
     if (this.addTaskForm.valid) {
       console.log(this.addTaskForm.value);
+      const newTaskId = Date.now(); // unique per task
       this.newTask = {
-        id: 1,
+        id: newTaskId,
         taskName: this.addTaskForm.value.taskName,
         assignedCard: title
-      }
+      };
       this.cardList = this.cardList.map(t => {
         if (t.id === id) {
           return {
@@ -99,4 +112,21 @@ export class KanbanBoardComponent {
     })
   }
 
+  toggleAddAnotherList() {
+    this.toggleAddList = !this.toggleAddList
+  }
+  submitList() {
+    if (this.addAnotherList.valid) {
+      console.log(this.addAnotherList.value);
+      this.newList = {
+        id: this.cardService.cardsLength$.value,
+        title: this.addAnotherList.value.listName,
+        wantedToAddCard: false,
+        listOfTask: []
+      }
+      this.cardService.addAnotherCard(this.newList)
+    }
+    this.toggleAddList = !this.toggleAddList;
+    this.addAnotherList.reset()
+  }
 }

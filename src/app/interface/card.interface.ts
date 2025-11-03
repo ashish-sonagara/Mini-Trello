@@ -2,7 +2,7 @@ export interface Card {
     id : number ;
     title : string;
     wantedToAddCard : boolean;
-    listOfTask : CardTask[]
+    listOfTask : CardTask[];
 }
 
 export interface CardTask {

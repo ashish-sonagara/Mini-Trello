@@ -63,16 +63,27 @@
                         </div>
                     </div>
                 </div>
-                
-                <div class="add-another-list">
-                    <div class="card-header">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                            <path d="M12 5v14M5 12h14" stroke="#6c757d" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                        <h5>Add Another List</h5>
-                    </div>
 
+                <div class="add-another-list">
+                    <ng-container>
+                        <div class="card-header" *ngIf="!toggleAddList" (click)="toggleAddAnotherList()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none">
+                                <path d="M12 5v14M5 12h14" stroke="#6c757d" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                            <h5>Add Another List</h5>
+                        </div>
+                        <div class="add-List" *ngIf="toggleAddList">
+                            <form [formGroup]="addAnotherList" (ngSubmit)="submitList()">
+                                <div class="input">
+                                    <input type="text" placeholder="Enter the List Name..." formControlName="listName">
+                                </div>
+                                <button class="primary-btn" type="submit" [disabled]="addAnotherList.invalid">Add
+                                    Card</button>
+                            </form>
+                        </div>
+                    </ng-container>
                 </div>
             </div>
         </div>
