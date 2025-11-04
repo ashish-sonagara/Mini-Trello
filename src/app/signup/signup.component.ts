@@ -28,7 +28,7 @@ export class SignupComponent implements OnInit{
 
   formSubmitted() {
     if (this.userForm.valid){
-      console.log(this.userForm.value)
+      // console.log(this.userForm.value)
     }
     const userdata = this.userForm.value; 
 

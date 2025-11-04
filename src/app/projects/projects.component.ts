@@ -51,17 +51,17 @@ export class ProjectsComponent implements OnInit {
     }
 
     let title = sessionStorage.getItem('title');
-    if (title) {
-      this.projectTitle = JSON.parse(title);
-      this.projectService.getProjectTaskList(this.projectTitle);
-    }
-    // using the subject which is in the taskService 
-    this.projectService.projectTaskList$.subscribe(res => {
-      this.projectBasedTaskList = res.map(task => {
-        return { ...task, flipped: false, noComment: !task.comments || task.comments.length === 0 }    // if task is undefined or empty nocomments = true
-      });
+    // if (title) {
+    //   this.projectTitle = JSON.parse(title);
+    //   this.projectService.getProjectTaskList(this.projectTitle);
+    // }
+    // // using the subject which is in the taskService 
+    // this.projectService.projectTaskList$.subscribe(res => {
+    //   this.projectBasedTaskList = res.map(task => {
+    //     return { ...task, flipped: false, noComment: !task.comments || task.comments.length === 0 }    // if task is undefined or empty nocomments = true
+    //   });
 
-    })
+    // })
     console.log("inside the project component ---", this.projectBasedTaskList)
   }
 

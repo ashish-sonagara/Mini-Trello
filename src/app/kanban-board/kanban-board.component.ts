@@ -17,6 +17,7 @@ import { Card, CardTask } from '../interface/card.interface';
   styleUrls: ['./kanban-board.component.scss']
 })
 export class KanbanBoardComponent {
+
   projectTitle: string = "";
   userData !: AuthUser;
   // New Task for the Card 
@@ -26,6 +27,7 @@ export class KanbanBoardComponent {
     assignedCard: ''
   }
   addTaskForm !: FormGroup;
+  newCardId : number = 0
 
   // Another list 
   newList: Card = {
@@ -36,6 +38,7 @@ export class KanbanBoardComponent {
   }
   addAnotherList !: FormGroup;
   toggleAddList: boolean = false;
+
   /**
    * HERE IS THE NEW DECLARED VARIABLES FOR THE TRELLO STYLE BOARD CARDS
    */
@@ -68,11 +71,21 @@ export class KanbanBoardComponent {
       this.userData = token;
     }
 
-    this.cardService.cards$.subscribe(res => {
-      this.cardList = res
-      console.log("inside the card component cards --> ", this.cardList);
+    const encryptTitle = sessionStorage.getItem('title');
+    if (encryptTitle) {
+      this.projectTitle = JSON.parse(encryptTitle)
+    }
+    this.projectService.projects$.subscribe(res => {
+      console.log("inside the kanban component ", res)
+      let project = res.find(t => {
+        return t.title === this.projectTitle
+      })
+      if (project) {
+        this.cardList = project.cardList;
+        console.log("this is the current project title " , this.projectTitle , "and this is the data" , project.cardList)
+        this.newCardId = project.cardList.length
+      }
     })
-
   }
 
   submitTask(id: number, title: string) {
@@ -94,7 +107,7 @@ export class KanbanBoardComponent {
           return t
         }
       })
-      this.cardService.updatedCardList(this.cardList)
+      this.cardService.updatedCardList(this.cardList , this.projectTitle)
       this.addTaskForm.reset()
       this.toggleToAddCard(id);
     }
@@ -119,14 +132,33 @@ export class KanbanBoardComponent {
     if (this.addAnotherList.valid) {
       console.log(this.addAnotherList.value);
       this.newList = {
-        id: this.cardService.cardsLength$.value,
+        id: this.newCardId,
         title: this.addAnotherList.value.listName,
         wantedToAddCard: false,
         listOfTask: []
       }
-      this.cardService.addAnotherCard(this.newList)
+      this.cardList = [...this.cardList , this.newList]
+      this.cardService.updatedCardList(this.cardList, this.projectTitle)
     }
     this.toggleAddList = !this.toggleAddList;
     this.addAnotherList.reset()
+  }
+
+  editTheTask(id: number) {
+
+  }
+
+  updateInput(event: Event, taskId: number, cardId: number) {
+    const value = (event.target as HTMLInputElement).checked;
+    this.cardList = this.cardList.map(card => {
+      if (card.id !== cardId) return card
+
+      return {
+        ...card,
+        listOfTask: card.listOfTask.map(task =>
+          task.id === taskId ? { ...task, checked: value } : task
+        )
+      }
+    })
   }
 }

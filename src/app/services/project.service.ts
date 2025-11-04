@@ -4,6 +4,8 @@ import { BehaviorSubject, combineLatest } from "rxjs";
 import { TaskService } from "./task.service";
 import { Task } from "../interface/task.interface";
 import { UserService } from "./user.service";
+import { Card } from "../interface/card.interface";
+import { CardService } from "./card.service";
 // import {} from ""
 
 @Injectable({
@@ -16,35 +18,115 @@ export class ProjectService {
             id: 0,
             title: "Mini-Torello-Guide",
             imageURL: "../../assets/smaple1.png",
-            assignedUserEmail: 'ashish@gmail.com'
+            assignedUserEmail: 'ashish@gmail.com',
+            cardList: [{
+                id: 0,
+                title: "To Do",
+                wantedToAddCard: false,
+                listOfTask: []
+            },
+            {
+                id: 1,
+                title: "Doing",
+                wantedToAddCard: false,
+                listOfTask: []
+            },
+            {
+                id: 2,
+                title: "Done",
+                wantedToAddCard: false,
+                listOfTask: []
+            }
+            ]
         },
         {
             id: 1,
             title: "Another Project",
             imageURL: "../../assets/sample2.png",
-            assignedUserEmail: 'ashish@gmail.com'
+            assignedUserEmail: 'ashish@gmail.com',
+            cardList: [{
+                id: 0,
+                title: "To Do",
+                wantedToAddCard: false,
+                listOfTask: []
+            },
+            {
+                id: 1,
+                title: "Doing",
+                wantedToAddCard: false,
+                listOfTask: []
+            },
+            {
+                id: 2,
+                title: "Done",
+                wantedToAddCard: false,
+                listOfTask: []
+            }
+            ]
         },
         {
             id: 2,
             title: "Angular Project",
             imageURL: "../../assets/sample3.png",
-            assignedUserEmail: 'ashish@gmail.com'
+            assignedUserEmail: 'ashish@gmail.com',
+            cardList: [{
+                id: 0,
+                title: "To Do",
+                wantedToAddCard: false,
+                listOfTask: []
+            },
+            {
+                id: 1,
+                title: "Doing",
+                wantedToAddCard: false,
+                listOfTask: []
+            },
+            {
+                id: 2,
+                title: "Done",
+                wantedToAddCard: false,
+                listOfTask: []
+            }
+            ]
         },
         {
             id: 3,
             title: "React Project",
             imageURL: "../../assets/sample3.png",
-            assignedUserEmail: 'jai@gmail.com'
+            assignedUserEmail: 'jai@gmail.com',
+            cardList: [{
+                id: 0,
+                title: "To Do",
+                wantedToAddCard: false,
+                listOfTask: []
+            },
+            {
+                id: 1,
+                title: "Doing",
+                wantedToAddCard: false,
+                listOfTask: []
+            },
+            {
+                id: 2,
+                title: "Done",
+                wantedToAddCard: false,
+                listOfTask: []
+            }
+            ]
         }
     ]
 
+    /**
+     * THIS BELOW IS THE SUBJECTS FOR THE PROJECT.
+     */
     projects$: BehaviorSubject<Project[]> = new BehaviorSubject<Project[]>(this.projects);
     projectId$: BehaviorSubject<number> = new BehaviorSubject<number>(this.projects$.value.length);
 
-    // this project list will get the tasklist and store the task based on the project name.
-    projectTaskList$: BehaviorSubject<Task[]> = new BehaviorSubject<Task[]>([])
-
-    constructor(private taskService: TaskService, private userService: UserService) { }
+    constructor(
+        private taskService: TaskService, 
+        private userService: UserService,
+        // private cardService: CardService 
+    ) { }
 
     // First Projects Will be Stored in session storage 
     storeProjectToSessionStorage() {
@@ -68,20 +150,6 @@ export class ProjectService {
         else {
             return [];
         }
-    }
-
-    // This method is used to get the TaskList based on the current project Opened
-    getProjectTaskList(title: string) {
-        combineLatest([this.taskService.tasks$, this.userService.currentUser$])
-            .subscribe(([tasks, currUser]) => {
-                if (!currUser) return;
-
-                const projectTasks = tasks.filter(
-                    t => t.assignedProject === title && t.assignedUserEmail === currUser.email
-                );
-
-                this.projectTaskList$.next(projectTasks);
-            });
     }
 
     // This method is used to store new Project in Project$ subject and store the whole Project$ in Session Storage

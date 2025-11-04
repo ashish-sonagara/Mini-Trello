@@ -37,10 +37,7 @@ export class DashboardComponent implements OnInit {
     this.headerService.userLoggedIn();
 
     // call the storeProjectToSessionStorage method to store the inital project to session storage.
-    this.projectService.storeProjectToSessionStorage()
-
-    // call the storeCardToSessionStorage() method to store the kanban board style to session storage when the app starts
-    this.cardService.storeCardToSessionStorage()
+    this.projectService.storeProjectToSessionStorage();
   }
 
   selectedItem(item: string) {

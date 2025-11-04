@@ -9,6 +9,7 @@ import { ToastrService } from "ngx-toastr";
     providedIn: 'root'
 })
 export class TaskService {
+    
     private tasks: Task[] = JSON.parse(sessionStorage.getItem('tasks') || 'null')
         ?? [{
             id: 0,
