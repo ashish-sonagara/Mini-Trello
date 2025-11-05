@@ -3,6 +3,7 @@ export interface Card {
     title: string;
     wantedToAddCard: boolean;
     listOfTask: CardTask[];
+    viewMoreOptions ?: boolean;
 }
 
 export interface CardTask {
@@ -10,4 +11,5 @@ export interface CardTask {
     taskName: string;
     assignedCard: string;
     checked?: boolean;
+    isEditing ?: boolean;
 }

@@ -27,7 +27,8 @@ export class KanbanBoardComponent {
     assignedCard: ''
   }
   addTaskForm !: FormGroup;
-  newCardId : number = 0
+  editTaskForm !: FormGroup;
+  newCardId: number = 0
 
   // Another list 
   newList: Card = {
@@ -57,8 +58,13 @@ export class KanbanBoardComponent {
     this.addTaskForm = this.fb.group({
       taskName: ["", Validators.required]
     })
+
     this.addAnotherList = this.fb.group({
       listName: ["", Validators.required]
+    })
+
+    this.editTaskForm = this.fb.group({
+      editTaskName: ["", Validators.required]
     })
   }
 
@@ -76,13 +82,13 @@ export class KanbanBoardComponent {
       this.projectTitle = JSON.parse(encryptTitle)
     }
     this.projectService.projects$.subscribe(res => {
-      console.log("inside the kanban component ", res)
+      // console.log("inside the kanban component ", res)
       let project = res.find(t => {
         return t.title === this.projectTitle
       })
       if (project) {
         this.cardList = project.cardList;
-        console.log("this is the current project title " , this.projectTitle , "and this is the data" , project.cardList)
+        // console.log("this is the current project title " , this.projectTitle , "and this is the data" , project.cardList)
         this.newCardId = project.cardList.length
       }
     })
@@ -90,7 +96,7 @@ export class KanbanBoardComponent {
 
   submitTask(id: number, title: string) {
     if (this.addTaskForm.valid) {
-      console.log(this.addTaskForm.value);
+      // console.log(this.addTaskForm.value);
       const newTaskId = Date.now(); // unique per task
       this.newTask = {
         id: newTaskId,
@@ -107,9 +113,27 @@ export class KanbanBoardComponent {
           return t
         }
       })
-      this.cardService.updatedCardList(this.cardList , this.projectTitle)
+      this.cardService.updatedCardList(this.cardList, this.projectTitle)
       this.addTaskForm.reset()
       this.toggleToAddCard(id);
+    }
+  }
+
+  editOldTask(taskId: number, cardId: number, title: string) {
+    if (this.editTaskForm.valid) {
+      console.log(this.editTaskForm.value)
+
+      this.cardList = this.cardList.map(card => {
+        if (card.id !== cardId) return card
+
+        return {
+          ...card, listOfTask: card.listOfTask.map(task =>
+            task.id == taskId ? { ...task, taskName: this.editTaskForm.value.editTaskName, isEditing: !task.isEditing } : task
+          )
+        }
+      })
+      this.cardService.updatedCardList(this.cardList, this.projectTitle)
+      this.addTaskForm.reset()
     }
   }
 
@@ -130,22 +154,32 @@ export class KanbanBoardComponent {
   }
   submitList() {
     if (this.addAnotherList.valid) {
-      console.log(this.addAnotherList.value);
+      // console.log(this.addAnotherList.value);
       this.newList = {
         id: this.newCardId,
         title: this.addAnotherList.value.listName,
         wantedToAddCard: false,
         listOfTask: []
       }
-      this.cardList = [...this.cardList , this.newList]
+      this.cardList = [...this.cardList, this.newList]
       this.cardService.updatedCardList(this.cardList, this.projectTitle)
     }
     this.toggleAddList = !this.toggleAddList;
     this.addAnotherList.reset()
   }
 
-  editTheTask(id: number) {
+  editTheTask(taskId: number, cardId: number) {
+    console.log("inside the editTask method")
+    this.cardList = this.cardList.map(card => {
+      if (card.id !== cardId) return card
 
+      return {
+        ...card, listOfTask: card.listOfTask.map(task =>
+          task.id === taskId ? { ...task, isEditing: !(task.isEditing ?? false) } : task
+        )
+      }
+    })
+    console.log(this.cardList)
   }
 
   updateInput(event: Event, taskId: number, cardId: number) {
@@ -158,6 +192,20 @@ export class KanbanBoardComponent {
         listOfTask: card.listOfTask.map(task =>
           task.id === taskId ? { ...task, checked: value } : task
         )
+      }
+    })
+  }
+
+  changeMoreOptions(index: number) {
+    // console.log("clicked ont the more options" , index)
+    this.cardList = this.cardList.map(card => {
+      if (card.id === index) {
+        return {
+          ...card, viewMoreOptions: !(card.viewMoreOptions ?? false)
+        }
+      }
+      else {
+        return card
       }
     })
   }

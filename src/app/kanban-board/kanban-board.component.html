@@ -22,30 +22,54 @@
             </div>
             <div class="tasks">
                 <div class="task-card" *ngFor="let card of cardList">
+                    <div class="more-options" *ngIf="card.viewMoreOptions">
+                        <div class="more-options-header">
+                            <span>List actions</span>
+                        </div>
+                        <div class="more-options-data">
+                            <div>Add card</div>
+                            <div>Copy list</div>
+                            <div>Move list</div>
+                            <div>Move all card in this list</div>
+                            <div>Sort by..</div>
+                            <div>Watch</div>
+                        </div>
+                    </div>
                     <div class="card-header">
                         <h5>{{card.title}}</h5>
-                        <div class="menu">
+                        <div class="menu" (click)="changeMoreOptions(card.id)">
                             <div></div>
                             <div></div>
                             <div></div>
                         </div>
                     </div>
                     <div class="taskList">
-                        <div class="task-item" *ngFor="let task of card.listOfTask"
-                            [ngClass]="{ 'task-item--checked': task.checked }">
+                        <div class="task-body" *ngFor="let task of card.listOfTask">
+                            <div class="task-item" *ngIf="task.isEditing"
+                                [ngClass]="{ 'task-item--checked': task.checked }">
+                                <form [formGroup]="editTaskForm" (ngSubmit)="editOldTask(task.id , card.id , card.title)">
+                                    <div class="input">
+                                        <input type="text" placeholder="Enter the title card..."
+                                            formControlName="editTaskName">
+                                    </div>
+                                    <button class="primary-btn" type="submit"
+                                        [disabled]="editTaskForm.invalid">Save</button>
+                                </form>
+                            </div>
+                            <div class="task-item" *ngIf="!task.isEditing">
+                                <input type="checkbox" class="task-checkbox" [checked]="task.checked"
+                                    (change)="updateInput($event, task.id, card.id)" />
 
-                            <input type="checkbox" class="task-checkbox" [checked]="task.checked"
-                                (change)="updateInput($event, task.id, card.id)" />
+                                <span class="task-name">{{ task.taskName }}</span>
+                                <button type="button" class="task-edit-btn" (click)="editTheTask(task.id , card.id)">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                    </svg>
+                                </button>
+                            </div>
 
-                            <span class="task-name">{{ task.taskName }}</span>
-
-                            <button class="task-edit-btn" (click)="editTheTask(task.id)">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2">
-                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                                </svg>
-                            </button>
                         </div>
                     </div>
                     <div class="add-card" *ngIf="card.wantedToAddCard">
