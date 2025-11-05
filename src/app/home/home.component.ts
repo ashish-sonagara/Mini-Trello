@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { HeaderService } from '../services/header.service';
 import { UserService } from '../services/user.service';
 
@@ -7,14 +7,24 @@ import { UserService } from '../services/user.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit, AfterViewInit {
 
-  constructor(private headerService : HeaderService, private userService : UserService){}
+  constructor(private headerService: HeaderService, private userService: UserService) { }
 
   ngOnInit(): void {
     let currUser = this.userService.currentUser$.value;
-    if(currUser){
+    if (currUser) {
       this.headerService.userLoggedOut();
     }
   }
+
+  ngAfterViewInit(): void {
+    // let vid : HTMLVideoElement | null = document.querySelector('.img-fluid')
+    // setTimeout(() => {
+    //   if(vid) {
+    //     vid.play()
+    //   }
+    // }, 1200);
+  }
+
 }
