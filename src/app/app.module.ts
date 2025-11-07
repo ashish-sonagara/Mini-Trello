@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SignupComponent } from './signup/signup.component';
 
-import { FormsModule ,ReactiveFormsModule} from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 import { HttpClientModule } from '@angular/common/http';
 import { SignInComponent } from './sign-in/sign-in.component';
@@ -22,6 +22,7 @@ import { provideToastr, ToastrModule } from 'ngx-toastr';
 import { FooterComponent } from './footer/footer.component';
 import { ProfileComponent } from './profile/profile.component';
 import { KanbanBoardComponent } from './kanban-board/kanban-board.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -48,9 +49,9 @@ import { KanbanBoardComponent } from './kanban-board/kanban-board.component';
     HttpClientModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(),
-
+    DragDropModule
   ],
-  providers: [ 
+  providers: [
     provideAnimations(), // required animations providers
     provideToastr(),
   ],

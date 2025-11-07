@@ -35,6 +35,11 @@
                     border: 1px solid #727272;
                     padding-left: 1rem;
                     border-radius: 0.3rem;
+
+                    &:focus{
+                        border: 2px solid #0052CC;
+                        outline: none;
+                    }
                 }
 
                 .button {
@@ -60,9 +65,7 @@
             }
         }
 
-        .right-side{
-            
-        }
+        .right-side {}
 
     }
 
@@ -157,6 +160,11 @@
                     border: 1px solid #727272;
                     padding-left: 1rem;
                     border-radius: 0.3rem;
+
+                    &:focus {
+                        border: 2px solid #0052CC;
+                        outline:none;
+                    }
                 }
 
                 .button {

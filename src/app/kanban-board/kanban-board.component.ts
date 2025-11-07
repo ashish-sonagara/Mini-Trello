@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommentInterface } from '../interface/comment.interface';
@@ -10,13 +10,14 @@ import { TaskService } from '../services/task.service';
 import { UserService } from '../services/user.service';
 import { CardService } from '../services/card.service';
 import { Card, CardTask } from '../interface/card.interface';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-kanban-board',
   templateUrl: './kanban-board.component.html',
   styleUrls: ['./kanban-board.component.scss']
 })
-export class KanbanBoardComponent {
+export class KanbanBoardComponent implements OnInit {
 
   projectTitle: string = "";
   userData !: AuthUser;
@@ -208,5 +209,24 @@ export class KanbanBoardComponent {
         return card
       }
     })
+  }
+
+  dropList(event: CdkDragDrop<Card[]>) {
+    moveItemInArray(this.cardList, event.previousIndex, event.currentIndex);
+  }
+
+  dropTask(event: CdkDragDrop<CardTask[]>) {
+    if (event.previousContainer === event.container) {
+      // Task was dragged within the same list
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      // Task moved between different lists
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    }
   }
 }

@@ -20,8 +20,8 @@
                     <p>Template</p>
                 </div>
             </div>
-            <div class="tasks">
-                <div class="task-card" *ngFor="let card of cardList">
+            <div class="tasks" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="dropList($event)">
+                <div class="task-card" *ngFor="let card of cardList" cdkDrag>
                     <div class="more-options" *ngIf="card.viewMoreOptions">
                         <div class="more-options-header">
                             <span>List actions</span>
@@ -43,11 +43,12 @@
                             <div></div>
                         </div>
                     </div>
-                    <div class="taskList">
-                        <div class="task-body" *ngFor="let task of card.listOfTask">
-                            <div class="task-item" *ngIf="task.isEditing"
-                                [ngClass]="{ 'task-item--checked': task.checked }">
-                                <form [formGroup]="editTaskForm" (ngSubmit)="editOldTask(task.id , card.id , card.title)">
+                    <div class="taskList" cdkDropList [cdkDropListData]="card.listOfTask"
+                        (cdkDropListDropped)="dropTask($event)">
+                        <div class="task-body" *ngFor="let task of card.listOfTask" cdkDrag>
+                            <div class="task-item" *ngIf="task.isEditing">
+                                <form [formGroup]="editTaskForm"
+                                    (ngSubmit)="editOldTask(task.id , card.id , card.title)">
                                     <div class="input">
                                         <input type="text" placeholder="Enter the title card..."
                                             formControlName="editTaskName">
@@ -56,7 +57,8 @@
                                         [disabled]="editTaskForm.invalid">Save</button>
                                 </form>
                             </div>
-                            <div class="task-item" *ngIf="!task.isEditing">
+                            <div class="task-item" *ngIf="!task.isEditing"
+                                [ngClass]="{ 'task-item--checked': task.checked }">
                                 <input type="checkbox" class="task-checkbox" [checked]="task.checked"
                                     (change)="updateInput($event, task.id, card.id)" />
 
