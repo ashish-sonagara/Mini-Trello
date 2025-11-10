@@ -15,6 +15,7 @@ import { CardService } from '../services/card.service';
 export class DashboardComponent implements OnInit {
 
   dashboardSelectedItem: string = "board";
+  templateClicked : boolean = false;
 
   constructor(
     private headerService: HeaderService,
@@ -41,6 +42,12 @@ export class DashboardComponent implements OnInit {
   }
 
   selectedItem(item: string) {
+    if(item == "template"){
+      this.templateClicked = true
+    }
+    else{
+      this.templateClicked = false
+    }
     this.dashboardSelectedItem = item;
   }
 

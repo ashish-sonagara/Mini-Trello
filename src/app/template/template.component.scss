@@ -1,0 +1,87 @@
+.container-fluid {
+    padding: 2rem;
+
+    .featured-categories {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+
+        .above {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            h2 {
+                font-size: 1.3rem;
+                font-weight: 600;
+                color: #333;
+            }
+
+            .inputs {
+                input {
+                    padding: 0.6rem 1rem;
+                    border: 1px solid #dee2e6;
+                    border-radius: 6px;
+                    outline: none;
+                    font-size: 1rem;
+                    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+
+                    &:focus {
+                        border: 2px solid #007bff;
+                    }
+                }
+            }
+        }
+
+        .bottom {
+            display: flex;
+            // justify-content: space-between;
+            gap: 1.5rem;
+
+            .category-item {
+                flex: 1 1 calc(14% - 1rem);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                cursor: pointer;
+                transition: transform 0.2s ease, box-shadow 0.3s ease;
+
+                &:hover {
+                    transform: translateY(-5px);
+
+                    .category-box {
+                        box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
+                        border-color: #dee2e6;
+                    }
+                }
+
+                .category-box {
+                    width: 100px;
+                    height: 100px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border: 1px solid #dee2e6;
+                    border-radius: 0.4rem;
+                    background-color: #fff;
+                    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+
+                    img {
+                        height: 100%;
+                        width: 100%;
+                        object-fit: contain;
+                        border-radius: 0.4rem;
+                    }
+                }
+
+                .category-name {
+                    margin-top: 0.75rem;
+                    font-size: 14px;
+                    font-weight: 500;
+                    color: #333;
+                }
+            }
+        }
+    }
+}

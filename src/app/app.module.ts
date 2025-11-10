@@ -23,6 +23,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ProfileComponent } from './profile/profile.component';
 import { KanbanBoardComponent } from './kanban-board/kanban-board.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { TemplateComponent } from './template/template.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     TaskFormComponent,
     FooterComponent,
     ProfileComponent,
-    KanbanBoardComponent
+    KanbanBoardComponent,
+    TemplateComponent
   ],
   imports: [
     BrowserModule,

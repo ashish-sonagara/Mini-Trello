@@ -46,7 +46,16 @@
                 &:hover {
                     background-color: #e4e6eb;
                 }
+
+                &--checked {
+                    padding: 0.6rem 3.5rem;
+                    color: #172b4d;
+                    font-weight: 500;
+                    font-size: 0.95rem;
+                }
             }
+
+
         }
     }
 
