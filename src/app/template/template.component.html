@@ -1,54 +1,81 @@
 <div class="container-fluid">
-    <div class="featured-categories">
-        <div class="above">
-            <h2>Featured Categories</h2>
-            <div class="inputs">
-                <input type="text" placeholder="Find template">
-            </div>
-        </div>
-        <div class="bottom">
-            <div class="category-item">
-                <div class="category-box">
-                    <img src="../../assets/business.svg" alt="business">
-                </div>
-                <p class="category-name">Business</p>
-            </div>
-            <div class="category-item">
-                <div class="category-box">
-                    <img src="../../assets/design.svg" alt="design">
-                </div>
-                <p class="category-name">Design</p>
-            </div>
-            <div class="category-item">
-                <div class="category-box">
-                    <img src="../../assets/education.svg" alt="education">
-                </div>
-                <p class="category-name">Education</p>
-            </div>
-            <div class="category-item">
-                <div class="category-box">
-                    <img src="../../assets/engineering.svg" alt="engineering">
-                </div>
-                <p class="category-name">Engineering</p>
-            </div>
-            <div class="category-item">
-                <div class="category-box">
-                    <img src="../../assets/marketing.svg" alt="marketing">
-                </div>
-                <p class="category-name">Marketing</p>
-            </div>
-            <div class="category-item">
-                <div class="category-box">
-                    <img src="../../assets/project-management.svg" alt="project-management">
-                </div>
-                <p class="category-name">Project Management</p>
-            </div>
-            <div class="category-item">
-                <div class="category-box">
-                    <img src="../../assets/remote work.svg" alt="remote work">
-                </div>
-                <p class="category-name">Remote Work</p>
-            </div>
-        </div>
-    </div>
+	<div class="featured-categories">
+		<div class="above">
+			<h2>Featured Categories</h2>
+			<div class="inputs">
+				<input type="text" placeholder="Find template">
+			</div>
+		</div>
+		<div class="bottom">
+			<div class="category-item">
+				<div class="category-box">
+					<img src="../../assets/business.svg" alt="business">
+				</div>
+				<p class="category-name">Business</p>
+			</div>
+			<div class="category-item">
+				<div class="category-box">
+					<img src="../../assets/design.svg" alt="design">
+				</div>
+				<p class="category-name">Design</p>
+			</div>
+			<div class="category-item">
+				<div class="category-box">
+					<img src="../../assets/education.svg" alt="education">
+				</div>
+				<p class="category-name">Education</p>
+			</div>
+			<div class="category-item">
+				<div class="category-box">
+					<img src="../../assets/engineering.svg" alt="engineering">
+				</div>
+				<p class="category-name">Engineering</p>
+			</div>
+			<div class="category-item">
+				<div class="category-box">
+					<img src="../../assets/marketing.svg" alt="marketing">
+				</div>
+				<p class="category-name">Marketing</p>
+			</div>
+			<div class="category-item">
+				<div class="category-box">
+					<img src="../../assets/project-management.svg" alt="project-management">
+				</div>
+				<p class="category-name">Project Management</p>
+			</div>
+			<div class="category-item">
+				<div class="category-box">
+					<img src="../../assets/remote work.svg" alt="remote work">
+				</div>
+				<p class="category-name">Remote Work</p>
+			</div>
+		</div>
+	</div>
+	<div class="new-notable-template">
+		<div class="notable-template">
+			<h2> New and Notable template </h2>
+		</div>
+		<div class="cards">
+			<div class="card" *ngFor="let temp of templates">
+				<div class="img">
+					<img [src]="temp.bgcImage" alt="just for trail">
+					<div class="prof-image">
+						<img [src]="temp.smallImage" alt="prof image">
+					</div>
+				</div>
+				<div class="description">
+					<h5>{{temp.title}}</h5>
+					<p>by {{temp.authorName}}</p>
+					<p>{{temp.description}}</p>
+					<div class="others">
+						<img width="16" height="16" src="https://img.icons8.com/material-outlined/24/copy.png" alt="copy" />
+						<p>{{temp.copied}}</p>
+						<img width="16" height="16" src="https://img.icons8.com/material-outlined/24/visible--v1.png"
+							alt="visible--v1" />
+						<p>{{temp.view}}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
