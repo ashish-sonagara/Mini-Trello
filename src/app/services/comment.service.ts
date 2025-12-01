@@ -22,8 +22,7 @@ export class CommentService {
     ) { }
 
     afterCommentAdded(newProjectTaskList: Task[]) {
-        this.projectService.projectTaskList$.next(newProjectTaskList);
-
+        
         const taskList = this.taskService.tasks$.value.map(task => {
             const updatedTask = newProjectTaskList.find(pt => pt.id === task.id);
             return updatedTask ? updatedTask : task;

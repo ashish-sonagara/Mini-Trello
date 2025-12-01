@@ -9,6 +9,7 @@ import { ToastrService } from "ngx-toastr";
     providedIn: 'root'
 })
 export class TaskService {
+    
     private tasks: Task[] = JSON.parse(sessionStorage.getItem('tasks') || 'null')
         ?? [{
             id: 0,
@@ -170,25 +171,6 @@ export class TaskService {
             }
         }
 
-        // if (oldTaskList) {
-        //     oldTaskList.forEach(task => {
-        //         if (task.id === newTask.id) {
-        //             let taskList = oldTaskList.filter(t => {
-        //                 return t.id !== newTask.id
-        //             })
-        //             taskList = [...taskList, newTask]
-        //             this.tasks$.next(taskList);
-        //             this.storeTaskToSessionStorage();
-        //             this.taskId.next(this.tasks$.value.length);
-        //         }
-        //         else {
-        //             let taskList = [...oldTaskList, newTask];
-        //             this.tasks$.next(taskList);
-        //             this.storeTaskToSessionStorage();
-        //             this.taskId.next(this.tasks$.value.length);
-        //         }
-        //     })
-        // }
     }
 
     deleteTaskFromSubject(taskId: number) {

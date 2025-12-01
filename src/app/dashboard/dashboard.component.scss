@@ -9,7 +9,7 @@
 
     .side-bar {
         background-color: #fff;
-        height: 100vh;
+        height: auto;
         padding: 1rem 0;
         border-right: 1px solid #e1e4e8;
         display: flex;
@@ -46,7 +46,16 @@
                 &:hover {
                     background-color: #e4e6eb;
                 }
+
+                &--checked {
+                    padding: 0.6rem 3.5rem;
+                    color: #172b4d;
+                    font-weight: 500;
+                    font-size: 0.95rem;
+                }
             }
+
+
         }
     }
 

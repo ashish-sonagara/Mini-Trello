@@ -1,0 +1,130 @@
+<app-header></app-header>
+<div class="container-fluid">
+    <div class="row main-container g-2">
+        <div class="col-md-3 left-side-bar">
+            <div class="inbox">
+                <h5>Inbox</h5>
+            </div>
+            <div class="search">
+                <input type="search" placeholder="Add card here..">
+            </div>
+            <div class="apps">
+                <h3>Conslidate your To-dos</h3>
+                <p> Email it , say it,forward it- <br> however it comes , get it into Trello fast</p>
+            </div>
+        </div>
+        <div class="col-md-9 right-side-bar">
+            <div class="header">
+                <h5>Project Based Learning </h5>
+                <div class="template">
+                    <p>Template</p>
+                </div>
+            </div>
+            <div class="tasks" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="dropList($event)">
+                <div class="task-card" *ngFor="let card of cardList" cdkDrag>
+                    <div class="more-options" *ngIf="card.viewMoreOptions">
+                        <div class="more-options-header">
+                            <span>List actions</span>
+                        </div>
+                        <div class="more-options-data">
+                            <div>Add card</div>
+                            <div>Copy list</div>
+                            <div>Move list</div>
+                            <div>Move all card in this list</div>
+                            <div>Sort by..</div>
+                            <div>Watch</div>
+                        </div>
+                    </div>
+                    <div class="card-header">
+                        <h5>{{card.title}}</h5>
+                        <div class="menu" (click)="changeMoreOptions(card.id)">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="taskList" cdkDropList [cdkDropListData]="card.listOfTask"
+                        (cdkDropListDropped)="dropTask($event)">
+                        <div class="task-body" *ngFor="let task of card.listOfTask" cdkDrag>
+                            <div class="task-item" *ngIf="task.isEditing">
+                                <form [formGroup]="editTaskForm"
+                                    (ngSubmit)="editOldTask(task.id , card.id , card.title)">
+                                    <div class="input">
+                                        <input type="text" placeholder="Enter the title card..."
+                                            formControlName="editTaskName">
+                                    </div>
+                                    <button class="primary-btn" type="submit"
+                                        [disabled]="editTaskForm.invalid">Save</button>
+                                </form>
+                            </div>
+                            <div class="task-item" *ngIf="!task.isEditing"
+                                [ngClass]="{ 'task-item--checked': task.checked }">
+                                <input type="checkbox" class="task-checkbox" [checked]="task.checked"
+                                    (change)="updateInput($event, task.id, card.id)" />
+
+                                <span class="task-name">{{ task.taskName }}</span>
+                                <button type="button" class="task-edit-btn" (click)="editTheTask(task.id , card.id)">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="add-card" *ngIf="card.wantedToAddCard">
+                        <form [formGroup]="addTaskForm" (ngSubmit)="submitTask(card.id , card.title)">
+                            <div class="input">
+                                <input type="text" placeholder="Enter the title card..." formControlName="taskName">
+                            </div>
+                            <button class="primary-btn" type="submit" [disabled]="addTaskForm.invalid">Add Card</button>
+                        </form>
+                    </div>
+                    <div class="add-card-click" *ngIf="!card.wantedToAddCard" (click)="toggleToAddCard(card.id)">
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none">
+                                <path d="M12 5v14M5 12h14" stroke="#6c757d" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                            <h5>Add a card</h5>
+                        </div>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect x="3" y="4" width="18" height="16" rx="2" stroke="#6c757d" stroke-width="2"
+                                    stroke-linejoin="round" />
+                                <line x1="3" y1="9" x2="21" y2="9" stroke="#6c757d" stroke-width="2" />
+                                <line x1="9" y1="9" x2="9" y2="20" stroke="#6c757d" stroke-width="2" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="add-another-list">
+                    <ng-container>
+                        <div class="card-header" *ngIf="!toggleAddList" (click)="toggleAddAnotherList()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none">
+                                <path d="M12 5v14M5 12h14" stroke="#6c757d" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                            <h5>Add Another List</h5>
+                        </div>
+                        <div class="add-List" *ngIf="toggleAddList">
+                            <form [formGroup]="addAnotherList" (ngSubmit)="submitList()">
+                                <div class="input">
+                                    <input type="text" placeholder="Enter the List Name..." formControlName="listName">
+                                </div>
+                                <button class="primary-btn" type="submit" [disabled]="addAnotherList.invalid">Add
+                                    Card</button>
+                            </form>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

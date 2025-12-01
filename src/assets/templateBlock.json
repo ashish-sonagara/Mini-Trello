@@ -1,0 +1,93 @@
+
+[
+  {
+    "bgcImage": "https://picsum.photos/seed/101/600/400",
+    "smallImage": "https://picsum.photos/seed/201/100/100",
+    "title": "The Hidden Art of Silence",
+    "authorName": "Rohan Mehta",
+    "description": "A deep reflection on the power of quiet thinking and personal clarity.",
+    "copied": "120k",
+    "view": "23k"
+  },
+  {
+    "bgcImage": "https://picsum.photos/seed/102/600/400",
+    "smallImage": "https://picsum.photos/seed/202/100/100",
+    "title": "Waves of Imagination",
+    "authorName": "Aisha Verma",
+    "description": "Exploring creativity through stories inspired by ocean waves.",
+    "copied": "89k",
+    "view": "54k"
+  },
+  {
+    "bgcImage": "httpsum.photos/seed/103/600/400",
+    "smallImage": "https://picsum.photos/seed/203/100/100",
+    "title": "Beyond the Digital Horizon",
+    "authorName": "Karan Patel",
+    "description": "A futuristic take on technology and human connection.",
+    "copied": "233k",
+    "view": "112k"
+  },
+  {
+    "bgcImage": "https://picsum.photos/seed/104/600/400",
+    "smallImage": "https://picsum.photos/seed/204/100/100",
+    "title": "A Journey Through Colors",
+    "authorName": "Meera Shah",
+    "description": "Understanding emotions through color psychology.",
+    "copied": "76k",
+    "view":"18k"
+  },
+  {
+    "bgcImage": "https://picsum.photos/seed/105/600/400",
+    "smallImage": "https://picsum.photos/seed/205/100/100",
+    "title": "Shadows of the Past",
+    "authorName": "Arjun Desai",
+    "description": "A thrilling dive into forgotten memories and lost places.",
+    "copied": "310k",
+    "view": "90k"
+  },
+  {
+    "bgcImage": "https://picsum.photos/seed/106/600/400",
+    "smallImage": "https://picsum.photos/seed/206/100/100",
+    "title": "Crafting the Future",
+    "authorName": "Simran Kaur",
+    "description": "How innovation and design shape tomorrow.",
+    "copied": "142k",
+    "view": "67k"
+  },
+  {
+    "bgcImage": "https://picsum.photos/seed/107/600/400",
+    "smallImage": "https://picsum.photos/seed/207/100/100",
+    "title": "Mindset of a Winner",
+    "authorName": "Rahul Singh",
+    "description": "Secrets behind high performance and discipline.",
+    "copied": "201k",
+    "view": "132k"
+  },
+  {
+    "bgcImage": "https://picsum.photos/seed/108/600/400",
+    "smallImage": "https://picsum.photos/seed/208/100/100",
+    "title": "The Last Ember",
+    "authorName": "Neha Bhatt",
+    "description": "A fantasy story about hope glowing in darkness.",
+    "copied": "98k",
+    "view": "44k"
+  },
+  {
+    "bgcImage": "https://picsum.photos/seed/109/600/400",
+    "smallImage": "https://picsum.photos/seed/209/100/100",
+    "title": "Chasing the Sunrise",
+    "authorName": "Vikram Joshi",
+    "description": "An inspiring journey about persistence and new beginnings.",
+    "copied": "165k",
+    "view": "56k"
+  },
+  {
+    "bgcImage": "https://picsum.photos/seed/110/600/400",
+    "smallImage": "https://picsum.photos/seed/210/100/100",
+    "title": "Fragments of Time",
+    "authorName": "Priya Nambiar",
+    "description": "A poetic look at fleeting moments and timeless memories.",
+    "copied": "284k",
+    "view": "149k"
+  }
+]

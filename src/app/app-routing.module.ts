@@ -7,12 +7,14 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { authGuard } from './services/user.service';
 import { ProjectsComponent } from './projects/projects.component';
 import { TaskFormComponent } from './task-form/task-form.component';
+import { KanbanBoardComponent } from './kanban-board/kanban-board.component';
 
 const routes: Routes = [
   {path : 'signUp' , component : SignupComponent},
   {path : 'signIn' , component : SignInComponent},
   {path : 'home' , component : HomeComponent},
-  {path : 'project' , component : ProjectsComponent},
+  // {path : 'project' , component : ProjectsComponent},
+  {path : 'project' , component : KanbanBoardComponent},
   {path : 'taskForm' , component : TaskFormComponent},
   {path : 'dashboard' , component : DashboardComponent , canActivate : [authGuard]},
   {path : '**' , redirectTo : '/home' , pathMatch : 'full'}   

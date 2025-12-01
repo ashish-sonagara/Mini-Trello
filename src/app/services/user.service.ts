@@ -16,7 +16,7 @@ export class UserService {
 
     storeDataTosessionStorage(userData: User) {
         let userList: User[] = [...this.userDataSubject.value, userData];
-        console.log(userList);
+        // console.log(userList);
         this.userDataSubject.next(userList);
         sessionStorage.setItem('userData', JSON.stringify(this.userDataSubject.value));
     }

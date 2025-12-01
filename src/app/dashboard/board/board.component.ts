@@ -3,11 +3,9 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
 import { Project } from 'src/app/interface/project.interface';
-import { Task } from 'src/app/interface/task.interface';
 import { AuthUser, User } from 'src/app/interface/user.interface';
 import { ProjectService } from 'src/app/services/project.service';
 import { UserService } from 'src/app/services/user.service';
-import { Modal } from 'bootstrap';
 
 @Component({
   selector: 'app-board',
@@ -22,7 +20,8 @@ export class BoardComponent implements OnInit {
     id: 0,
     title: '',
     imageURL: '',
-    assignedUserEmail: ''
+    assignedUserEmail: '',
+    cardList: []
   }
 
   constructor(private userService: UserService, private route: Router, private projectService: ProjectService) { }
@@ -57,7 +56,26 @@ export class BoardComponent implements OnInit {
         id: this.projectService.projectId$.value,
         title: form.value.title,
         assignedUserEmail: form.value.assignedUserEmail,
-        imageURL: form.value.imageURL
+        imageURL: form.value.imageURL,
+        cardList: [{
+          id: 0,
+          title: "To Do",
+          wantedToAddCard: false,
+          listOfTask: []
+        },
+        {
+          id: 1,
+          title: "Doing",
+          wantedToAddCard: false,
+          listOfTask: []
+        },
+        {
+          id: 2,
+          title: "Done",
+          wantedToAddCard: false,
+          listOfTask: []
+        }
+        ]
       };
       if (this.userData.role === 'Developer' || this.userData.role === 'Admin') {
         this.projectService.addProjectToSubject(project);
@@ -76,16 +94,6 @@ export class BoardComponent implements OnInit {
 
   goingToTheprojectPage(title: string) {
     sessionStorage.setItem('title', JSON.stringify(title));
-    // this.projectService.getProjectTaskList(title);
   }
-
-  // openShareProjectModal(event: Event) {
-  //   // this stopPropogation() method stops the any event to run for eg if we click on share Project modal click will generally close the Modal.
-  //   event.stopPropagation();
-  //   let projectModal = document.getElementById('staticBackdrop');
-  //   let shareModal = new Modal(document.getElementById('shareProject')!);
-
-  //   shareModal.show()
-  // }
 
 }
