@@ -69,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "min-torello:build:production"
+              "buildTarget": "min-torello:build:production"
             },
             "development": {
-              "browserTarget": "min-torello:build:development"
+              "buildTarget": "min-torello:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -80,7 +80,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "min-torello:build"
+            "buildTarget": "min-torello:build"
           }
         },
         "test": {
