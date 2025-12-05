@@ -3,9 +3,10 @@ import { TemplateService } from '../services/template.service';
 import { templateBlock } from '../interface/templateBlock.interface';
 
 @Component({
-  selector: 'app-template',
-  templateUrl: './template.component.html',
-  styleUrls: ['./template.component.scss']
+    selector: 'app-template',
+    templateUrl: './template.component.html',
+    styleUrls: ['./template.component.scss'],
+    standalone: false
 })
 export class TemplateComponent implements OnInit{
 

@@ -8,9 +8,10 @@ import { ProjectService } from '../services/project.service';
 import { CardService } from '../services/card.service';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+    selector: 'app-dashboard',
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.scss'],
+    standalone: false
 })
 export class DashboardComponent implements OnInit {
 

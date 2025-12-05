@@ -5,9 +5,10 @@ import { Router } from '@angular/router';
 import { AuthUser } from '../interface/user.interface';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+    selector: 'app-profile',
+    templateUrl: './profile.component.html',
+    styleUrls: ['./profile.component.scss'],
+    standalone: false
 })
 export class ProfileComponent implements OnInit{
 

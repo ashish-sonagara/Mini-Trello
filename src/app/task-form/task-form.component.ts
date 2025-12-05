@@ -6,9 +6,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NavigationService } from '../services/navigatio.service';
 
 @Component({
-  selector: 'app-task-form',
-  templateUrl: './task-form.component.html',
-  styleUrls: ['./task-form.component.scss']
+    selector: 'app-task-form',
+    templateUrl: './task-form.component.html',
+    styleUrls: ['./task-form.component.scss'],
+    standalone: false
 })
 export class TaskFormComponent implements OnInit {
 

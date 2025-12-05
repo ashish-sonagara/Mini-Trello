@@ -7,9 +7,10 @@ import { UserService } from 'src/app/services/user.service';
 import { Chart, registerables } from 'chart.js';
 
 @Component({
-  selector: 'app-stats',
-  templateUrl: './stats.component.html',
-  styleUrls: ['./stats.component.scss']
+    selector: 'app-stats',
+    templateUrl: './stats.component.html',
+    styleUrls: ['./stats.component.scss'],
+    standalone: false
 })
 export class StatsComponent implements OnInit, AfterViewInit {
 

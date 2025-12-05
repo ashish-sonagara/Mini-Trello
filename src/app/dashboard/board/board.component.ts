@@ -8,9 +8,10 @@ import { ProjectService } from 'src/app/services/project.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-board',
-  templateUrl: './board.component.html',
-  styleUrls: ['./board.component.scss']
+    selector: 'app-board',
+    templateUrl: './board.component.html',
+    styleUrls: ['./board.component.scss'],
+    standalone: false
 })
 export class BoardComponent implements OnInit {
   userData !: AuthUser;

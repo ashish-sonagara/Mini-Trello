@@ -11,9 +11,10 @@ import { CommentInterface } from '../interface/comment.interface';
 import { CommentService } from '../services/comment.service';
 
 @Component({
-  selector: 'app-projects',
-  templateUrl: './projects.component.html',
-  styleUrls: ['./projects.component.scss']
+    selector: 'app-projects',
+    templateUrl: './projects.component.html',
+    styleUrls: ['./projects.component.scss'],
+    standalone: false
 })
 export class ProjectsComponent implements OnInit {
 

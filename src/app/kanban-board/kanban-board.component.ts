@@ -13,9 +13,10 @@ import { Card, CardTask } from '../interface/card.interface';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
-  selector: 'app-kanban-board',
-  templateUrl: './kanban-board.component.html',
-  styleUrls: ['./kanban-board.component.scss']
+    selector: 'app-kanban-board',
+    templateUrl: './kanban-board.component.html',
+    styleUrls: ['./kanban-board.component.scss'],
+    standalone: false
 })
 export class KanbanBoardComponent implements OnInit {
 
